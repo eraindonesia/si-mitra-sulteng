@@ -75,12 +75,260 @@
   <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 
   <!-- Modular Stylesheet Include -->
-  <link rel="stylesheet" href="css/style.css?v=1.0.1" />
+  <link rel="stylesheet" href="css/style.css?v=1.0.2" />
   <link rel="preconnect" href="https://script.google.com" />
   <link rel="preconnect" href="https://script.googleusercontent.com" />
 </head>
 
 <body class="bg-surface text-on-surface antialiased overflow-x-hidden min-h-screen">
+  <!-- ===================================================================
+       STANDALONE DEDICATED PORTAL LOGIN GATE (/ui-ux-pro-max & /gas-pro-api)
+       Gerbang Masuk Utama SI-MITRA KONSERVASI SULTENG
+       =================================================================== -->
+  <div id="portal-auth-gate" class="min-h-screen w-full bg-[#00152D] text-white flex flex-col justify-between relative overflow-x-hidden">
+    <!-- Ambient Oceanic Glow Background -->
+    <div class="absolute -top-40 -left-40 w-96 h-96 bg-secondary-teal/20 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-secondary/30 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-primary-container/40 rounded-full blur-3xl pointer-events-none"></div>
+
+    <!-- Top Navigation Bar on Auth Gate -->
+    <header class="w-full max-w-7xl mx-auto px-6 py-6 flex items-center justify-between relative z-10">
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-2xl bg-secondary-teal/20 border border-secondary-teal/40 flex items-center justify-center text-secondary-teal shadow-lg shadow-secondary-teal/10">
+          <span class="material-symbols-outlined text-[28px]">waves</span>
+        </div>
+        <div>
+          <h1 class="font-extrabold text-[18px] tracking-tight text-white flex items-center gap-2">
+            <span>SI-MITRA</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] bg-secondary-teal/20 text-secondary-teal border border-secondary-teal/40 font-semibold">SULTENG</span>
+          </h1>
+          <p class="text-[11px] text-on-primary-container uppercase tracking-wider font-semibold">Dinas Kelautan dan Perikanan Prov. Sulteng</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <div class="hidden sm:flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-gray-300">
+          <span class="w-2 h-2 rounded-full bg-marine animate-pulse"></span>
+          <span>REST API Online</span>
+        </div>
+        <button onclick="toggleDarkMode()" class="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white transition-colors" title="Ganti Tema">
+          <span class="material-symbols-outlined text-[20px]">dark_mode</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Hero & Auth Container -->
+    <main class="w-full max-w-7xl mx-auto px-6 py-6 flex-1 flex items-center relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center w-full">
+        
+        <!-- Left Column: Branding, Mission & 4 Kepmen-KP Areas -->
+        <div class="lg:col-span-7 space-y-6">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary-teal/15 border border-secondary-teal/30 text-secondary-teal text-[12px] font-semibold">
+            <span class="material-symbols-outlined text-[16px]">verified</span>
+            <span>Portal Kemitraan Konservasi Perairan Resmi</span>
+          </div>
+
+          <div class="space-y-3">
+            <h2 class="text-[32px] sm:text-[40px] xl:text-[46px] font-extrabold text-white leading-tight tracking-tight">
+              Kemitraan Berkelanjutan untuk Laut <span class="text-secondary-teal">Sulawesi Tengah</span>
+            </h2>
+            <p class="text-[14px] sm:text-[16px] text-gray-300 leading-relaxed max-w-2xl">
+              Sistem Informasi terpadu pengajuan, verifikasi teknis, pelaporan berkala, dan penandatanganan Perjanjian Kemitraan (PKS) di 4 Kawasan Konservasi Perairan berdasarkan Keputusan Menteri Kelautan dan Perikanan (KEPMEN-KP).
+            </p>
+          </div>
+
+          <!-- 4 Kawasan Konservasi Badges -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+            <div class="p-3.5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md hover:border-secondary-teal/50 transition-all">
+              <div class="flex items-start gap-2.5">
+                <span class="material-symbols-outlined text-secondary-teal text-[20px] shrink-0 mt-0.5">location_on</span>
+                <div>
+                  <h4 class="text-[13px] font-bold text-white">KK Daerah Banggai Dalaka</h4>
+                  <p class="text-[11px] text-gray-400">Kepmen-KP 53/2019 • 69.182 Ha</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-3.5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md hover:border-secondary-teal/50 transition-all">
+              <div class="flex items-start gap-2.5">
+                <span class="material-symbols-outlined text-secondary-teal text-[20px] shrink-0 mt-0.5">location_on</span>
+                <div>
+                  <h4 class="text-[13px] font-bold text-white">KK Perairan Teluk Tomini</h4>
+                  <p class="text-[11px] text-gray-400">Kepmen-KP 64/2020 • 83.420 Ha</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-3.5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md hover:border-secondary-teal/50 transition-all">
+              <div class="flex items-start gap-2.5">
+                <span class="material-symbols-outlined text-secondary-teal text-[20px] shrink-0 mt-0.5">location_on</span>
+                <div>
+                  <h4 class="text-[13px] font-bold text-white">KK Kepulauan Togean</h4>
+                  <p class="text-[11px] text-gray-400">Kepmen-KP 67/2021 • 336.772 Ha</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-3.5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md hover:border-secondary-teal/50 transition-all">
+              <div class="flex items-start gap-2.5">
+                <span class="material-symbols-outlined text-secondary-teal text-[20px] shrink-0 mt-0.5">location_on</span>
+                <div>
+                  <h4 class="text-[13px] font-bold text-white">KK Teluk Mori & Kolonodale</h4>
+                  <p class="text-[11px] text-gray-400">Kepmen-KP 71/2022 • 45.890 Ha</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Security and Integrity Pill -->
+          <div class="flex flex-wrap items-center gap-4 pt-1 text-[12px] text-gray-400">
+            <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-marine text-[18px]">verified_user</span> Alur Standar 12 Tahapan DKP</span>
+            <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-secondary-teal text-[18px]">qr_code_2</span> Verifikasi Dokumen Sah Ber-HMAC</span>
+          </div>
+        </div>
+
+        <!-- Right Column: Dedicated Auth Box -->
+        <div class="lg:col-span-5 w-full max-w-md mx-auto">
+          <div class="bg-surface-card text-on-surface rounded-3xl p-6 sm:p-8 shadow-2xl border border-white/10 backdrop-blur-xl space-y-5">
+            
+            <!-- Auth Header & Tab Switcher -->
+            <div>
+              <div class="flex items-center justify-between pb-3 border-b border-border">
+                <div>
+                  <h3 class="text-[18px] font-extrabold text-primary">Autentikasi Pengguna</h3>
+                  <p class="text-[11px] text-text-muted">Masuk untuk mengakses layanan kemitraan</p>
+                </div>
+                <div class="w-10 h-10 rounded-xl bg-primary/5 text-secondary-teal flex items-center justify-center">
+                  <span class="material-symbols-outlined text-[24px]">lock</span>
+                </div>
+              </div>
+
+              <!-- Switch Tabs -->
+              <div class="grid grid-cols-2 gap-1 p-1 bg-surface-low rounded-xl mt-4">
+                <button type="button" onclick="toggleAuthTab('login')" id="auth-tab-btn-login" class="py-2 text-[12px] font-bold rounded-lg bg-white text-primary shadow-sm transition-all">
+                  Masuk Akun
+                </button>
+                <button type="button" onclick="toggleAuthTab('register')" id="auth-tab-btn-register" class="py-2 text-[12px] font-bold rounded-lg text-text-sub hover:text-primary transition-all">
+                  Daftar Calon Mitra
+                </button>
+              </div>
+            </div>
+
+            <!-- Form 1: Login Akun -->
+            <form id="form-login" onsubmit="handleAuthLogin(event)" class="space-y-3.5 text-[12px]">
+              <div>
+                <label class="block font-bold text-on-surface mb-1">Email Resmi / Akun</label>
+                <div class="relative">
+                  <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-sub text-[18px]">mail</span>
+                  <input id="login-email" type="email" required class="w-full pl-9 pr-3 py-2.5 bg-surface-low rounded-xl border border-border focus:border-secondary-teal focus:bg-white text-on-surface" placeholder="kartika.prl@dkp.sultengprov.go.id" value="kartika.prl@dkp.sultengprov.go.id"/>
+                </div>
+              </div>
+
+              <div>
+                <label class="block font-bold text-on-surface mb-1">Kata Sandi</label>
+                <div class="relative">
+                  <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-sub text-[18px]">key</span>
+                  <input id="login-password" type="password" required class="w-full pl-9 pr-3 py-2.5 bg-surface-low rounded-xl border border-border focus:border-secondary-teal focus:bg-white text-on-surface" placeholder="••••••••" value="Mitra2026!"/>
+                </div>
+              </div>
+
+              <button type="submit" id="btn-submit-login" class="w-full btn-primary justify-center py-3 text-[13px] font-bold shadow-md hover:shadow-lg mt-2">
+                <span class="material-symbols-outlined text-[18px]">login</span>
+                <span>Masuk ke SI-MITRA</span>
+              </button>
+            </form>
+
+            <!-- Form 2: Registrasi Mitra Mandiri -->
+            <form id="form-register" onsubmit="handleAuthRegister(event)" class="hidden space-y-3 text-[12px]">
+              <div>
+                <label class="block font-bold text-on-surface mb-1">Nama Lembaga / Kelompok</label>
+                <input id="reg-lembaga" required class="w-full p-2.5 bg-surface-low rounded-xl border border-border" placeholder="Contoh: Pokmaswas Tanjung Api"/>
+              </div>
+
+              <div>
+                <label class="block font-bold text-on-surface mb-1">Kategori Mitra (Sesuai PRD)</label>
+                <select id="reg-jenis-mitra" class="w-full p-2.5 bg-surface-low rounded-xl border border-border">
+                  <option value="Kelompok Masyarakat">Kelompok Masyarakat</option>
+                  <option value="Masyarakat Adat">Masyarakat Adat</option>
+                  <option value="LSM Nasional">LSM Nasional</option>
+                  <option value="LSM Provinsi/Kabupaten/Kota">LSM Provinsi/Kabupaten/Kota</option>
+                  <option value="Pelaku Usaha / Korporasi">Pelaku Usaha / Korporasi</option>
+                  <option value="Perguruan Tinggi Nasional">Perguruan Tinggi Nasional</option>
+                  <option value="Lembaga Penelitian Dalam Negeri">Lembaga Penelitian Dalam Negeri</option>
+                </select>
+              </div>
+
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <label class="block font-bold text-on-surface mb-1">Email</label>
+                  <input id="reg-email" type="email" required class="w-full p-2.5 bg-surface-low rounded-xl border border-border" placeholder="kontak@mitra.org"/>
+                </div>
+                <div>
+                  <label class="block font-bold text-on-surface mb-1">WhatsApp / HP</label>
+                  <input id="reg-telepon" type="tel" class="w-full p-2.5 bg-surface-low rounded-xl border border-border" placeholder="081145..."/>
+                </div>
+              </div>
+
+              <div>
+                <label class="block font-bold text-on-surface mb-1">Kata Sandi Baru</label>
+                <input id="reg-password" type="password" required class="w-full p-2.5 bg-surface-low rounded-xl border border-border" placeholder="Minimal 8 karakter"/>
+              </div>
+
+              <button type="submit" id="btn-submit-register" class="w-full btn-primary justify-center py-2.5 text-[13px] font-bold mt-1">
+                <span class="material-symbols-outlined text-[18px]">person_add</span>
+                <span>Daftar Akun Mitra</span>
+              </button>
+            </form>
+
+            <!-- Quick Demo Personas -->
+            <div class="pt-4 border-t border-border space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-bold text-primary flex items-center gap-1">
+                  <span class="material-symbols-outlined text-[15px] text-secondary-teal">bolt</span>
+                  <span>Masuk Cepat Demo Peran:</span>
+                </span>
+                <span class="text-[10px] text-text-muted">1-Klik Akses</span>
+              </div>
+
+              <div class="grid grid-cols-2 gap-1.5 text-[11px]">
+                <button type="button" onclick="quickLoginDemo('prl')" class="p-2 rounded-xl bg-surface-low hover:bg-secondary-teal/10 border border-border hover:border-secondary-teal text-left transition-all">
+                  <strong class="text-primary block text-[11px]">1. Tim PRL (Verifikator)</strong>
+                  <span class="text-text-muted text-[10px]">Ir. Kartika Sari</span>
+                </button>
+                <button type="button" onclick="quickLoginDemo('uptd')" class="p-2 rounded-xl bg-surface-low hover:bg-secondary-teal/10 border border-border hover:border-secondary-teal text-left transition-all">
+                  <strong class="text-primary block text-[11px]">2. UPTD Konservasi</strong>
+                  <span class="text-text-muted text-[10px]">Drs. Hendra W.</span>
+                </button>
+                <button type="button" onclick="quickLoginDemo('kepala')" class="p-2 rounded-xl bg-surface-low hover:bg-secondary-teal/10 border border-border hover:border-secondary-teal text-left transition-all">
+                  <strong class="text-primary block text-[11px]">3. Kepala DKP</strong>
+                  <span class="text-text-muted text-[10px]">Dr. H. Moh. Arif</span>
+                </button>
+                <button type="button" onclick="quickLoginDemo('mitra')" class="p-2 rounded-xl bg-surface-low hover:bg-secondary-teal/10 border border-border hover:border-secondary-teal text-left transition-all">
+                  <strong class="text-primary block text-[11px]">4. Calon Mitra</strong>
+                  <span class="text-text-muted text-[10px]">Ahmad Fauzi</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- Footer of Auth Gate -->
+    <footer class="w-full max-w-7xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between text-[11px] text-gray-400 border-t border-white/5 relative z-10 gap-2">
+      <span>© 2026 Dinas Kelautan dan Perikanan Provinsi Sulawesi Tengah. Seluruh Hak Cipta Dilindungi.</span>
+      <span class="flex items-center gap-1 text-secondary-teal">
+        <span class="material-symbols-outlined text-[14px]">shield</span>
+        <span>Akses Terenkripsi & Terlindungi</span>
+      </span>
+    </footer>
+  </div>
+
+  <!-- ======================== APP MAIN WORKSPACE SHELL (AFTER AUTH) ======================== -->
+  <div id="app-main-shell" class="min-h-screen" style="display: none;">
+
 
   <!-- Mobile Drawer Backdrop Overlay -->
   <div id="sidebar-backdrop" class="sidebar-backdrop" onclick="toggleMobileSidebar()"></div>
@@ -248,7 +496,7 @@
         <div class="h-6 w-px bg-border"></div>
 
         <!-- User Profile Pill -->
-        <div class="flex items-center gap-2 pl-1 cursor-pointer" onclick="navigateTo('portal-auth')">
+        <div class="flex items-center gap-2 pl-1">
           <div class="w-8 h-8 rounded-full bg-primary-container text-white flex items-center justify-center font-bold text-[12px] shadow-sm">
             <span id="user-avatar-initials">KS</span>
           </div>
@@ -257,6 +505,11 @@
             <span id="user-display-role" class="text-[10px] text-secondary font-semibold">Tim Bidang PRL / Verifikator</span>
           </div>
         </div>
+
+        <button onclick="handleLogout()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-error/10 hover:bg-error/20 text-error text-[12px] font-semibold transition-all ml-1" title="Keluar dari Akun">
+          <span class="material-symbols-outlined text-[18px]">logout</span>
+          <span class="hidden sm:inline">Keluar</span>
+        </button>
       </div>
     </header>
 
@@ -1628,7 +1881,9 @@
     </main>
   </div>
 
-  <!-- ======================== GLOBAL MODALS ======================== -->
+  
+  </div> <!-- End of #app-main-shell -->
+<!-- ======================== GLOBAL MODALS ======================== -->
 
   <!-- Modal Advance Stage -->
   <div id="modal-advance-stage" class="modal-overlay">
@@ -1726,7 +1981,7 @@
   <div id="toast-container"></div>
 
   <!-- Modular JavaScript Include -->
-  <script src="js/config.js?v=1.0.1"></script>
-  <script src="js/app.js?v=1.0.1"></script>
+  <script src="js/config.js?v=1.0.2"></script>
+  <script src="js/app.js?v=1.0.2"></script>
 </body>
 </html>

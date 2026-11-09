@@ -89,37 +89,85 @@ window.AppState = {
 
 // ======================== BOOTSTRAPPER (ANTI-RACE-CONDITION) ========================
 
+// ======================== GATEKEEPER & WORKSPACE SHELL CONTROLLER ========================
+
+function showLoginGate() {
+  console.log('🔒 Menampilkan Portal Login Gate');
+  const gate = document.getElementById('portal-auth-gate');
+  const shell = document.getElementById('app-main-shell');
+  if (gate) gate.style.display = 'flex';
+  if (shell) shell.style.display = 'none';
+  if (window.location.hash !== '#login') {
+    history.replaceState(null, '', '#login');
+  }
+}
+
+function revealMainApp(user) {
+  console.log('🔓 Membuka Workspace Aplikasi SI-MITRA');
+  const gate = document.getElementById('portal-auth-gate');
+  const shell = document.getElementById('app-main-shell');
+  if (gate) gate.style.display = 'none';
+  if (shell) shell.style.display = 'block';
+
+  if (user) {
+    window.AppState.currentUser = user;
+  }
+
+  updateUserInterfaceRole();
+  renderAllComponents();
+
+  // Arahkan ke dashboard atau rute hash terakhir
+  const hash = window.location.hash.replace('#', '') || 'dashboard';
+  if (hash === 'login' || hash === 'portal-auth' || !hash) {
+    navigateTo('dashboard');
+  } else {
+    navigateTo(hash);
+  }
+}
+
+function handleLogout() {
+  SafeStorage.removeItem(CONFIG.STORAGE_KEY_AUTH);
+  window.AppState.currentUser = null;
+  window.AppState.sessionToken = null;
+  showToast('Sesi Berakhir', 'Anda telah berhasil keluar dari sistem SI-MITRA.', 'info');
+  showLoginGate();
+}
+
 function bootApp() {
   console.log('🚀 Memulai SI-MITRA KONSERVASI SULTENG SPA...');
-  try {
-    initTheme();
-  } catch (e) {
-    console.warn('Init theme warning:', e);
+  try { initTheme(); } catch (e) { console.warn('Init theme warning:', e); }
+  try { loadOfflineDataFallback(); } catch (e) { console.warn('Fallback data warning:', e); }
+  try { setupEventListeners(); } catch (e) { console.warn('Event listeners warning:', e); }
+
+  // Periksa apakah sudah ada sesi login aktif
+  const savedSession = SafeStorage.getItem(CONFIG.STORAGE_KEY_AUTH);
+  let authedUser = null;
+
+  if (savedSession) {
+    try {
+      const parsed = JSON.parse(savedSession);
+      if (parsed && (parsed.user || parsed.email)) {
+        authedUser = parsed.user || {
+          nama: parsed.nama || parsed.email,
+          email: parsed.email,
+          peran: parsed.peran || 'prl',
+          lembaga: parsed.lembaga || 'Dinas Kelautan dan Perikanan'
+        };
+        window.AppState.currentUser = authedUser;
+        window.AppState.sessionToken = parsed.token || 'token_restored';
+      }
+    } catch (e) {}
   }
 
-  try {
-    loadOfflineDataFallback();
-  } catch (e) {
-    console.warn('Fallback data warning:', e);
+  if (authedUser) {
+    console.log('✅ Sesi aktif ditemukan untuk:', authedUser.email);
+    revealMainApp(authedUser);
+  } else {
+    console.log('🔒 Belum ada sesi aktif. Membuka Portal Login.');
+    showLoginGate();
   }
 
-  try {
-    setupEventListeners();
-  } catch (e) {
-    console.warn('Event listeners warning:', e);
-  }
-
-  try {
-    navigateTo('dashboard');
-  } catch (e) {
-    console.warn('Navigation warning:', e);
-  }
-
-  try {
-    fetchDataFromServer();
-  } catch (e) {
-    console.warn('Fetch server warning:', e);
-  }
+  try { fetchDataFromServer(); } catch (e) { console.warn('Fetch server warning:', e); }
 }
 
 // Jalankan bootApp baik saat DOMContentLoaded maupun jika skrip dimuat setelah DOM siap
@@ -1452,9 +1500,66 @@ function switchDemoRole(role) {
   showToast('Peran Diaktifkan', `Mode pengujian berganti menjadi: ${p.roleName}`, 'info');
 }
 
-function quickLoginDemo(role) {
-  switchDemoRole(role);
-  navigateTo('dashboard');
+function quickLoginDemo(roleKey) {
+  const personas = {
+    prl: {
+      id: 'USR-PRL-01',
+      nama: 'Ir. Kartika Sari, M.Si',
+      email: 'kartika.prl@dkp.sultengprov.go.id',
+      peran: 'prl',
+      lembaga: 'Bidang Pengelolaan Ruang Laut DKP',
+      jenis_mitra: '-',
+      telepon: '0811450002'
+    },
+    uptd: {
+      id: 'USR-UPTD-01',
+      nama: 'Drs. Hendra Wibowo, M.Sc',
+      email: 'hendra.uptd@dkp.sultengprov.go.id',
+      peran: 'uptd',
+      lembaga: 'UPTD Kawasan Konservasi Perairan',
+      jenis_mitra: '-',
+      telepon: '0811450003'
+    },
+    kepala: {
+      id: 'USR-KADIS-01',
+      nama: 'Dr. H. Moh. Arif, S.Pi, M.Si',
+      email: 'kepala.dkp@sultengprov.go.id',
+      peran: 'kepala_dkp',
+      lembaga: 'Kepala Dinas Kelautan dan Perikanan Sulteng',
+      jenis_mitra: '-',
+      telepon: '0811450001'
+    },
+    mitra: {
+      id: 'USR-MITRA-01',
+      nama: 'Ahmad Fauzi',
+      email: 'kontak@terumbutominitrust.org',
+      peran: 'mitra',
+      lembaga: 'Yayasan Terumbu Teluk Tomini',
+      jenis_mitra: 'LSM Nasional',
+      telepon: '081234567890'
+    },
+    admin: {
+      id: 'USR-ADM-01',
+      nama: 'Administrator Sistem',
+      email: 'admin@dkp.sultengprov.go.id',
+      peran: 'admin',
+      lembaga: 'Sekretariat DKP Provinsi Sulawesi Tengah',
+      jenis_mitra: '-',
+      telepon: '0811450099'
+    }
+  };
+
+  const p = personas[roleKey] || personas.prl;
+  window.AppState.currentUser = p;
+  window.AppState.sessionToken = 'token_demo_' + roleKey;
+
+  SafeStorage.setItem(CONFIG.STORAGE_KEY_AUTH, JSON.stringify({
+    user: p,
+    token: window.AppState.sessionToken
+  }));
+
+  showToast('Masuk Demo Berhasil', `Selamat datang, ${p.nama} (${p.lembaga})`, 'success');
+  revealMainApp(p);
 }
 
 function toggleAuthTab(tab) {
@@ -1509,14 +1614,14 @@ async function handleAuthLogin(e) {
       showToast('Login Berhasil', `Selamat datang, ${window.AppState.currentUser.nama || email}`, 'success');
       updateUserInterfaceRole();
       renderAllComponents();
-      navigateTo('dashboard');
+      revealMainApp(window.AppState.currentUser);
     } else {
       showToast('Login Info', (res && res.message) || `Masuk sebagai ${email}`, 'success');
-      navigateTo('dashboard');
+      revealMainApp(window.AppState.currentUser);
     }
   } catch (err) {
     showToast('Login Berhasil', `Selamat datang, ${email} (Mode Offline)`, 'success');
-    navigateTo('dashboard');
+    revealMainApp(window.AppState.currentUser);
   }
 }
 
@@ -1888,3 +1993,7 @@ window.handleAuthRegister = handleAuthRegister;
 window.handleFormPengajuanSubmit = handleFormPengajuanSubmit;
 window.refreshDataFromServer = refreshDataFromServer;
 window.callApi = callApi;
+
+window.showLoginGate = showLoginGate;
+window.revealMainApp = revealMainApp;
+window.handleLogout = handleLogout;

@@ -12,7 +12,7 @@ const CONFIG = {
   // Masukkan URL Google Apps Script Web App (/exec) hasil deployment di bawah ini:
   // Contoh: 'https://script.google.com/macros/s/AKfycbx.../exec'
   // Jika dikosongkan (''), aplikasi otomatis berjalan dalam MODE DEMO AKTIF (Data Offline Lengkap)
-  GAS_URL: '',
+  GAS_URL: 'https://script.google.com/macros/s/AKfycbyRsGRfPgP4GZbmgOJOttqoemMH-RUUobMsVDpatTjGxTB10HAP03Iy66onDh_-bxLdug/exec',
 
   APP_NAME: 'SI-MITRA KONSERVASI SULTENG',
   APP_LONG_NAME: 'Sistem Informasi Kemitraan Kawasan Konservasi Provinsi Sulawesi Tengah',

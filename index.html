@@ -1,0 +1,1732 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta name="theme-color" content="#0B2A4A"/>
+  <title>SI-MITRA KONSERVASI SULTENG - DKP Provinsi Sulawesi Tengah</title>
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  
+  <!-- Material Symbols Outlined -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'primary': '#00152d',
+            'primary-container': '#0b2a4a',
+            'on-primary': '#ffffff',
+            'on-primary-container': '#7892b7',
+            'secondary': '#00696d',
+            'secondary-teal': '#14a3a8',
+            'secondary-container': '#7df1f6',
+            'on-secondary': '#ffffff',
+            'on-secondary-container': '#006e71',
+            'tertiary': '#00152d',
+            'tertiary-container': '#002a50',
+            'on-tertiary': '#ffffff',
+            'on-tertiary-container': '#5893db',
+            'surface': '#f9f9ff',
+            'surface-card': '#ffffff',
+            'surface-dim': '#c8dbfc',
+            'surface-bright': '#f9f9ff',
+            'surface-container-low': '#eff3ff',
+            'surface-container': '#e6eeff',
+            'surface-container-high': '#dde9ff',
+            'surface-container-highest': '#d4e3ff',
+            'on-surface': '#061c35',
+            'on-surface-variant': '#43474e',
+            'outline': '#74777f',
+            'outline-variant': '#c4c6cf',
+            'error': '#ba1a1a',
+            'error-container': '#ffdad6',
+            'on-error': '#ffffff',
+            'on-error-container': '#93000a',
+            'coral': '#f26b4f',
+            'marine': '#10b981',
+            'amber-warn': '#e8a33d'
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif']
+          },
+          borderRadius: {
+            'DEFAULT': '0.375rem',
+            'lg': '0.625rem',
+            'xl': '0.875rem',
+            '2xl': '1rem'
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- External CDNs for Instant UX and Visuals -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+  <!-- Modular Stylesheet Include -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://script.google.com" />
+  <link rel="preconnect" href="https://script.googleusercontent.com" />
+</head>
+
+<body class="bg-surface text-on-surface antialiased overflow-x-hidden min-h-screen">
+
+  <!-- Mobile Drawer Backdrop Overlay -->
+  <div id="sidebar-backdrop" class="sidebar-backdrop" onclick="toggleMobileSidebar()"></div>
+
+  <!-- ======================== ASIDE SIDEBAR NAVIGATION ======================== -->
+  <aside id="app-sidebar" class="fixed left-0 top-0 bottom-0 w-[240px] bg-primary-container text-on-primary flex flex-col z-50 shadow-[0_10px_24px_-4px_rgba(11,42,74,0.12)]">
+    <!-- Brand Header -->
+    <div class="h-16 px-4 flex items-center justify-between bg-primary border-b border-on-primary-fixed-variant/20">
+      <div class="flex items-center gap-2.5 min-w-0">
+        <div class="w-9 h-9 rounded-lg bg-secondary-container/20 flex items-center justify-center text-secondary-container shrink-0">
+          <span class="material-symbols-outlined text-[22px]">waves</span>
+        </div>
+        <div class="flex flex-col min-w-0">
+          <span class="font-bold text-[14px] tracking-tight text-on-primary truncate">SI-MITRA</span>
+          <span class="text-[10px] text-on-primary-container uppercase tracking-wider font-semibold truncate">DKP PROV. SULTENG</span>
+        </div>
+      </div>
+      <!-- Close drawer on mobile -->
+      <button onclick="toggleMobileSidebar()" class="lg:hidden text-on-primary-container hover:text-white p-1">
+        <span class="material-symbols-outlined text-[20px]">close</span>
+      </button>
+    </div>
+
+    <!-- Navigation List (0ms Instant Client-Side SPA) -->
+    <div class="flex-1 overflow-y-auto px-2 py-3 space-y-1">
+      <div class="px-2 pt-1 pb-1">
+        <span class="text-[10px] uppercase tracking-wider text-on-primary-container font-bold">Navigasi Utama</span>
+      </div>
+
+      <nav class="flex flex-col gap-0.5">
+        <a href="javascript:void(0)" onclick="navigateTo('dashboard')" data-section="dashboard" class="nav-item active flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-white transition-colors">
+          <span class="material-symbols-outlined text-[18px]">dashboard</span>
+          <span class="truncate">Dashboard Utama</span>
+        </a>
+
+        <a href="javascript:void(0)" onclick="navigateTo('daftar-pengajuan')" data-section="daftar-pengajuan" class="nav-item flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-on-primary-container hover:bg-tertiary-container hover:text-white transition-colors">
+          <span class="material-symbols-outlined text-[18px]">view_list</span>
+          <span class="truncate">Daftar Pengajuan</span>
+          <span id="badge-total-pengajuan" class="ml-auto text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-secondary text-white">38</span>
+        </a>
+
+        <a href="javascript:void(0)" onclick="navigateTo('ajukan-kemitraan')" data-section="ajukan-kemitraan" class="nav-item flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-on-primary-container hover:bg-tertiary-container hover:text-white transition-colors">
+          <span class="material-symbols-outlined text-[18px]">post_add</span>
+          <span class="truncate">Ajukan Kemitraan</span>
+        </a>
+
+        <a href="javascript:void(0)" onclick="navigateTo('telaah-dan-verifikasi')" data-section="telaah-dan-verifikasi" class="nav-item flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-on-primary-container hover:bg-tertiary-container hover:text-white transition-colors">
+          <span class="material-symbols-outlined text-[18px]">rule</span>
+          <span class="truncate">Telaah & Verifikasi</span>
+        </a>
+
+        <a href="javascript:void(0)" onclick="navigateTo('berita-acara-dan-pks')" data-section="berita-acara-dan-pks" class="nav-item flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-on-primary-container hover:bg-tertiary-container hover:text-white transition-colors">
+          <span class="material-symbols-outlined text-[18px]">contract</span>
+          <span class="truncate">Berita Acara & PKS</span>
+        </a>
+
+        <a href="javascript:void(0)" onclick="navigateTo('monitoring-dan-evaluasi')" data-section="monitoring-dan-evaluasi" class="nav-item flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-on-primary-container hover:bg-tertiary-container hover:text-white transition-colors">
+          <span class="material-symbols-outlined text-[18px]">insights</span>
+          <span class="truncate">Monitoring & Evaluasi</span>
+        </a>
+
+        <a href="javascript:void(0)" onclick="navigateTo('laporan-dan-statistik')" data-section="laporan-dan-statistik" class="nav-item flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-on-primary-container hover:bg-tertiary-container hover:text-white transition-colors">
+          <span class="material-symbols-outlined text-[18px]">analytics</span>
+          <span class="truncate">Laporan & Statistik</span>
+        </a>
+
+        <!-- Section Tata Kelola & Publik -->
+        <div class="pt-3 px-2 pb-1">
+          <span class="text-[10px] uppercase tracking-wider text-on-primary-container font-bold">Tata Kelola & Alat</span>
+        </div>
+
+        <a href="javascript:void(0)" onclick="navigateTo('manajemen-pengguna')" data-section="manajemen-pengguna" class="nav-item flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-on-primary-container hover:bg-tertiary-container hover:text-white transition-colors">
+          <span class="material-symbols-outlined text-[18px]">manage_accounts</span>
+          <span class="truncate">Manajemen Pengguna</span>
+        </a>
+
+        <a href="javascript:void(0)" onclick="navigateTo('verifikasi-dokumen')" data-section="verifikasi-dokumen" class="nav-item flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-on-primary-container hover:bg-tertiary-container hover:text-white transition-colors">
+          <span class="material-symbols-outlined text-[18px]">qr_code_scanner</span>
+          <span class="truncate">Verifikasi Dokumen (QR)</span>
+        </a>
+
+        <a href="javascript:void(0)" onclick="navigateTo('migrasi-database')" data-section="migrasi-database" class="nav-item flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-on-primary-container hover:bg-tertiary-container hover:text-white transition-colors">
+          <span class="material-symbols-outlined text-[18px]">sync_alt</span>
+          <span class="truncate">Migrasi Database</span>
+        </a>
+      </nav>
+    </div>
+
+    <!-- Quick Role Switcher Pill & Session Controls -->
+    <div class="p-3 bg-tertiary border-t border-on-primary-fixed-variant/20 flex flex-col gap-2">
+      <!-- Role Switcher Select for fast testing across personas -->
+      <div class="bg-tertiary-container/70 p-2 rounded-lg">
+        <div class="flex items-center justify-between mb-1">
+          <span class="text-[10px] font-bold text-on-primary-container uppercase">Peran Aktif</span>
+          <span id="role-pill-badge" class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-secondary text-white uppercase">PRL</span>
+        </div>
+        <select id="select-role-switcher" onchange="switchDemoRole(this.value)" class="w-full text-[11px] bg-primary text-white border border-on-primary-fixed-variant/30 rounded px-2 py-1 focus:outline-none cursor-pointer">
+          <option value="prl">Tim Bidang PRL (Verifikator)</option>
+          <option value="uptd">Kepala / Tim UPTD Pengelola</option>
+          <option value="kepala_dkp">Kepala Dinas Kelautan & Perikanan</option>
+          <option value="mitra">Calon Mitra Pengusul</option>
+          <option value="admin">Administrator Sistem</option>
+        </select>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="flex items-center justify-between text-[11px] px-1 text-on-primary-container">
+        <button onclick="toggleDarkMode()" class="flex items-center gap-1 hover:text-white transition-colors">
+          <span id="theme-icon" class="material-symbols-outlined text-[15px]">dark_mode</span>
+          <span id="theme-label">Tema</span>
+        </button>
+        <button onclick="navigateTo('portal-auth')" class="flex items-center gap-1 hover:text-secondary-teal transition-colors font-semibold">
+          <span class="material-symbols-outlined text-[15px]">lock</span>
+          <span>Portal Login</span>
+        </button>
+      </div>
+
+      <div class="flex items-center justify-between pt-1 px-1 text-[10px] text-on-primary-container/70 border-t border-white/5">
+        <span>v1.0 DKP Sulteng</span>
+        <span class="text-secondary-teal font-medium flex items-center gap-0.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-marine inline-block"></span> Online
+        </span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ======================== MAIN WRAPPER ======================== -->
+  <div class="main-content-wrapper lg:pl-[240px] transition-all duration-200">
+
+    <!-- Top Utility Header -->
+    <header id="app-header" class="fixed top-0 left-0 lg:left-[240px] right-0 h-16 bg-surface-card/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(11,42,74,0.06)] border-b border-border z-40 flex items-center justify-between px-4 lg:px-8 transition-all">
+      <!-- Left: Mobile Trigger & Search Bar -->
+      <div class="flex items-center gap-3 flex-1 max-w-2xl">
+        <button onclick="toggleMobileSidebar()" class="lg:hidden p-2 rounded-lg text-text-muted hover:bg-surface-low hover:text-primary">
+          <span class="material-symbols-outlined text-[24px]">menu</span>
+        </button>
+
+        <div class="relative w-full max-w-md">
+          <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-sub text-[18px]">search</span>
+          <input id="global-search-input" onkeyup="handleGlobalSearch(this.value)" class="w-full pl-9 pr-4 py-2 bg-surface-low text-on-surface text-[13px] rounded-xl border border-transparent focus:border-secondary-teal focus:bg-white placeholder:text-text-sub/60" placeholder="Cari usulan, nomor registrasi, mitra, atau kawasan..."/>
+        </div>
+
+        <div class="hidden xl:flex items-center gap-1.5 px-3 py-1 bg-surface-low rounded-full">
+          <span class="material-symbols-outlined text-[16px] text-secondary-teal">info</span>
+          <span class="text-[11px] text-text-muted truncate max-w-xs">Sistem Informasi Kemitraan Kawasan Konservasi Sulawesi Tengah</span>
+        </div>
+      </div>
+
+      <!-- Right: Info Chips & User Profile -->
+      <div class="flex items-center gap-3">
+        <!-- Date / Jurisdiction info -->
+        <div class="hidden sm:flex items-center gap-1.5 px-3 py-1 bg-surface-container rounded-lg text-primary text-[11px] font-semibold">
+          <span class="material-symbols-outlined text-[16px] text-secondary">water</span>
+          <span>4 KEPMEN-KP Konservasi</span>
+        </div>
+
+        <!-- Notification Bell -->
+        <div class="relative">
+          <button onclick="toggleNotificationDropdown()" class="p-2 rounded-full hover:bg-surface-container text-text-muted hover:text-primary relative transition-colors">
+            <span class="material-symbols-outlined text-[22px]">notifications</span>
+            <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-coral rounded-full"></span>
+          </button>
+        </div>
+
+        <div class="h-6 w-px bg-border"></div>
+
+        <!-- User Profile Pill -->
+        <div class="flex items-center gap-2 pl-1 cursor-pointer" onclick="navigateTo('portal-auth')">
+          <div class="w-8 h-8 rounded-full bg-primary-container text-white flex items-center justify-center font-bold text-[12px] shadow-sm">
+            <span id="user-avatar-initials">KS</span>
+          </div>
+          <div class="hidden md:flex flex-col text-left">
+            <span id="user-display-name" class="text-[12px] font-bold text-on-surface leading-tight">Ir. Kartika Sari, M.Si</span>
+            <span id="user-display-role" class="text-[10px] text-secondary font-semibold">Tim Bidang PRL / Verifikator</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Content Workspace Container -->
+    <main class="w-full pt-16 bg-surface min-h-screen">
+      <div id="app-container" class="max-w-[1680px] w-full mx-auto px-4 md:px-6 lg:px-8 py-6">
+
+        <!-- ===================================================================
+             SECTION 1: DASHBOARD UTAMA SI-MITRA
+             =================================================================== -->
+        <section id="section-dashboard" class="content-section active space-y-6">
+          <!-- Top Greeting & Action Controls -->
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <div class="flex items-center gap-2">
+                <h1 id="dashboard-greeting" class="text-[24px] lg:text-[28px] text-on-surface font-bold tracking-tight">Selamat Datang, Ir. Kartika Sari! 👋</h1>
+              </div>
+              <p class="text-[13px] text-text-muted mt-0.5">
+                Berikut ringkasan siklus kemitraan pengelolaan kawasan konservasi perairan Sulawesi Tengah hari ini.
+              </p>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2.5">
+              <div class="flex items-center gap-1.5 px-3 py-2 bg-surface-card rounded-xl border border-border shadow-sm text-[12px] font-semibold text-on-surface">
+                <span class="material-symbols-outlined text-[18px] text-secondary-teal">calendar_month</span>
+                <span>Tahun 2026 / Berjalan</span>
+              </div>
+              <button onclick="navigateTo('ajukan-kemitraan')" class="btn-primary text-[12px]">
+                <span class="material-symbols-outlined text-[18px]">add_circle</span>
+                <span>+ Usulan Baru (Lamp. II)</span>
+              </button>
+              <button onclick="exportDashboardSummary()" class="btn-outline text-[12px]">
+                <span class="material-symbols-outlined text-[18px]">file_download</span>
+                <span>Ekspor Rekap</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 5 Top KPI Cards Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            <!-- Card 1 -->
+            <div class="bg-surface-card p-4 rounded-xl border border-border shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] uppercase font-bold tracking-wider text-text-sub">Total Pengajuan</span>
+                <div class="w-8 h-8 rounded-full bg-secondary-teal/15 flex items-center justify-center text-secondary-teal">
+                  <span class="material-symbols-outlined text-[18px]">assignment</span>
+                </div>
+              </div>
+              <div class="my-2">
+                <span id="kpi-total-pengajuan" class="text-[26px] font-bold text-on-surface tracking-tight">38 Usulan</span>
+              </div>
+              <div class="flex items-center gap-1 text-[11px]">
+                <span class="px-1.5 py-0.5 rounded-full bg-marine/10 text-marine font-bold">+14.2%</span>
+                <span class="text-text-sub">vs periode lalu</span>
+              </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="bg-surface-card p-4 rounded-xl border border-border shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] uppercase font-bold tracking-wider text-text-sub">Dalam Telaah</span>
+                <div class="w-8 h-8 rounded-full bg-primary-container/15 flex items-center justify-center text-primary-container">
+                  <span class="material-symbols-outlined text-[18px]">pending_actions</span>
+                </div>
+              </div>
+              <div class="my-2">
+                <span id="kpi-dalam-telaah" class="text-[26px] font-bold text-on-surface tracking-tight">14 Dokumen</span>
+              </div>
+              <div class="flex items-center gap-1.5 text-[11px]">
+                <span class="px-2 py-0.5 rounded-full bg-surface-container font-semibold text-primary">Tahap 3 - 7</span>
+                <span class="text-text-sub">Sedang telaah</span>
+              </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="bg-surface-card p-4 rounded-xl border border-border shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] uppercase font-bold tracking-wider text-text-sub">Revisi Dokumen</span>
+                <div class="w-8 h-8 rounded-full bg-coral/15 flex items-center justify-center text-coral">
+                  <span class="material-symbols-outlined text-[18px]">history_edu</span>
+                </div>
+              </div>
+              <div class="my-2">
+                <span id="kpi-revisi" class="text-[26px] font-bold text-coral tracking-tight">5 Dokumen</span>
+              </div>
+              <div class="flex items-center gap-1 text-[11px]">
+                <span class="px-1.5 py-0.5 rounded-full bg-coral/15 text-coral font-bold">Perlu Dilengkapi</span>
+                <span class="text-text-sub">Oleh mitra</span>
+              </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="bg-surface-card p-4 rounded-xl border border-border shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] uppercase font-bold tracking-wider text-text-sub">PKS Berjalan</span>
+                <div class="w-8 h-8 rounded-full bg-secondary-container/40 flex items-center justify-center text-secondary">
+                  <span class="material-symbols-outlined text-[18px]">handshake</span>
+                </div>
+              </div>
+              <div class="my-2">
+                <span id="kpi-pks" class="text-[26px] font-bold text-on-surface tracking-tight">12 Kemitraan</span>
+              </div>
+              <div class="flex items-center gap-1 text-[11px]">
+                <span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-bold">Tahap 9 - 11</span>
+                <span class="text-text-sub">PKS Sah</span>
+              </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="bg-surface-card p-4 rounded-xl border border-border shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] uppercase font-bold tracking-wider text-text-sub">Realisasi Monev</span>
+                <div class="w-8 h-8 rounded-full bg-marine/15 flex items-center justify-center text-marine">
+                  <span class="material-symbols-outlined text-[18px]">verified</span>
+                </div>
+              </div>
+              <div class="my-2">
+                <span id="kpi-monev" class="text-[26px] font-bold text-marine tracking-tight">82.4%</span>
+              </div>
+              <div class="flex items-center justify-between text-[11px] text-text-sub">
+                <span>Target: 100%</span>
+                <span class="font-bold text-marine">On-Track</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 12-Stage Visual Stepper Pipeline Dashboard Overview -->
+          <div class="bg-surface-card p-5 rounded-xl border border-border shadow-sm flex flex-col gap-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-lg bg-primary-container text-white flex items-center justify-center">
+                  <span class="material-symbols-outlined text-[18px]">account_tree</span>
+                </div>
+                <div>
+                  <h2 class="text-[16px] font-bold text-on-surface">Distribusi Alur 12 Tahapan Kemitraan Konservasi</h2>
+                  <p class="text-[12px] text-text-muted">Monitoring berkas permohonan kemitraan per fase tindak lanjut DKP Sulteng</p>
+                </div>
+              </div>
+              <a href="javascript:void(0)" onclick="navigateTo('daftar-pengajuan')" class="text-[12px] font-semibold text-secondary-teal hover:underline flex items-center gap-1">
+                <span>Lihat Tabel Lengkap</span>
+                <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+              </a>
+            </div>
+
+            <!-- 5 Big Phase Chevron Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5">
+              <!-- Phase 1: Tahap 1 - 3 -->
+              <div class="p-3 rounded-lg bg-secondary-teal/10 border border-secondary-teal/30 flex flex-col justify-between">
+                <div class="flex items-center justify-between">
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-secondary">Fase 1: Tahap 1 - 3</span>
+                  <span class="text-[10px] bg-secondary-teal text-white px-2 py-0.5 rounded-full font-bold">9 Usulan</span>
+                </div>
+                <div class="font-bold text-[13px] text-primary mt-1">Permohonan & Verifikasi</div>
+                <div class="text-[11px] text-text-muted mt-1">Lampiran I, II, & III</div>
+              </div>
+
+              <!-- Phase 2: Tahap 4 - 5 -->
+              <div class="p-3 rounded-lg bg-primary-container/10 border border-primary-container/30 flex flex-col justify-between">
+                <div class="flex items-center justify-between">
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-primary">Fase 2: Tahap 4 - 5</span>
+                  <span class="text-[10px] bg-primary-container text-white px-2 py-0.5 rounded-full font-bold">6 Usulan</span>
+                </div>
+                <div class="font-bold text-[13px] text-primary mt-1">Telaah Ruang & Pembiayaan</div>
+                <div class="text-[11px] text-text-muted mt-1">Lampiran IV & V (RPZ)</div>
+              </div>
+
+              <!-- Phase 3: Tahap 6 - 8 -->
+              <div class="p-3 rounded-lg bg-tertiary-container/10 border border-tertiary-container/30 flex flex-col justify-between">
+                <div class="flex items-center justify-between">
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-tertiary">Fase 3: Tahap 6 - 8</span>
+                  <span class="text-[10px] bg-tertiary-container text-white px-2 py-0.5 rounded-full font-bold">4 Usulan</span>
+                </div>
+                <div class="font-bold text-[13px] text-primary mt-1">Pemaparan & BA Sepakat</div>
+                <div class="text-[11px] text-text-muted mt-1">Lampiran VI & VII</div>
+              </div>
+
+              <!-- Phase 4: Tahap 9 - 11 -->
+              <div class="p-3 rounded-lg bg-on-tertiary-container/10 border border-on-tertiary-container/30 flex flex-col justify-between">
+                <div class="flex items-center justify-between">
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-on-tertiary-container">Fase 4: Tahap 9 - 11</span>
+                  <span class="text-[10px] bg-on-tertiary-container text-white px-2 py-0.5 rounded-full font-bold">7 Usulan</span>
+                </div>
+                <div class="font-bold text-[13px] text-primary mt-1">Draft PKS & Tanda Tangan</div>
+                <div class="text-[11px] text-text-muted mt-1">Lapor Gubernur & PKS Sah</div>
+              </div>
+
+              <!-- Phase 5: Tahap 12 -->
+              <div class="p-3 rounded-lg bg-secondary-container/20 border border-secondary/30 flex flex-col justify-between">
+                <div class="flex items-center justify-between">
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-secondary">Fase 5: Tahap 12</span>
+                  <span class="text-[10px] bg-secondary text-white px-2 py-0.5 rounded-full font-bold">12 Usulan</span>
+                </div>
+                <div class="font-bold text-[13px] text-primary mt-1">Monev & Pelaksanaan</div>
+                <div class="text-[11px] text-text-muted mt-1">Lampiran VIII Berkala</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mid Section: 2-Column Analytics & Action Reminders -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <!-- Left Column (7 cols): Analytics and Breakdowns -->
+            <div class="lg:col-span-7 flex flex-col gap-6">
+              <!-- Visual Charts Grid -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Donut Chart: Sebaran Mitra -->
+                <div class="bg-surface-card p-4 rounded-xl border border-border shadow-sm flex flex-col justify-between">
+                  <div class="flex items-center justify-between mb-2">
+                    <div>
+                      <h3 class="text-[13px] font-bold text-on-surface">Sebaran Jenis Mitra</h3>
+                      <span class="text-[11px] text-text-muted">Komposisi pengusul aktif</span>
+                    </div>
+                    <span class="material-symbols-outlined text-[20px] text-secondary">pie_chart</span>
+                  </div>
+                  <div class="relative h-48 flex items-center justify-center">
+                    <canvas id="chart-mitra-donut"></canvas>
+                  </div>
+                </div>
+
+                <!-- Bar Chart: Sebaran Kawasan -->
+                <div class="bg-surface-card p-4 rounded-xl border border-border shadow-sm flex flex-col justify-between">
+                  <div class="flex items-center justify-between mb-2">
+                    <div>
+                      <h3 class="text-[13px] font-bold text-on-surface">Sebaran 4 Kawasan KK</h3>
+                      <span class="text-[11px] text-text-muted">Berdasarkan KEPMEN-KP</span>
+                    </div>
+                    <span class="material-symbols-outlined text-[20px] text-secondary">bar_chart</span>
+                  </div>
+                  <div class="relative h-48 flex items-center justify-center">
+                    <canvas id="chart-kawasan-bar"></canvas>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Usulan Terbaru Mini-Table -->
+              <div class="bg-surface-card p-4 rounded-xl border border-border shadow-sm">
+                <div class="flex items-center justify-between mb-3">
+                  <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-secondary text-[18px]">update</span>
+                    <h3 class="text-[14px] font-bold text-on-surface">Permohonan Kemitraan Terbaru</h3>
+                  </div>
+                  <button onclick="navigateTo('daftar-pengajuan')" class="text-[11px] text-secondary-teal font-semibold hover:underline">Semua Usulan →</button>
+                </div>
+                <div class="overflow-x-auto">
+                  <table class="w-full text-[12px] text-left">
+                    <thead class="bg-surface-low text-text-sub uppercase text-[10px]">
+                      <tr>
+                        <th class="py-2 px-3">No. Reg</th>
+                        <th class="py-2 px-3">Lembaga & Usulan</th>
+                        <th class="py-2 px-3">Kawasan</th>
+                        <th class="py-2 px-3">Tahap</th>
+                        <th class="py-2 px-3 text-right">Aksi</th>
+                      </tr>
+                    </thead>
+                    <tbody id="table-dashboard-recent" class="divide-y divide-border">
+                      <!-- Rendered by JS -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Column (5 cols): Action Reminders & Audit Log -->
+            <div class="lg:col-span-5 flex flex-col gap-6">
+              <!-- Urgent Task Reminders -->
+              <div class="bg-surface-card p-4 rounded-xl border border-border shadow-sm">
+                <div class="flex items-center justify-between mb-3">
+                  <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-coral text-[18px]">notification_important</span>
+                    <h3 class="text-[14px] font-bold text-on-surface">Tindak Lanjut Mendesak</h3>
+                  </div>
+                  <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-coral/15 text-coral">3 Tenggat</span>
+                </div>
+                <div class="space-y-2.5">
+                  <div class="p-2.5 rounded-lg bg-surface-low border border-border flex items-start gap-2.5">
+                    <span class="material-symbols-outlined text-coral text-[18px] shrink-0 mt-0.5">warning</span>
+                    <div class="flex-1 text-[12px]">
+                      <div class="flex items-center justify-between">
+                        <span class="font-bold text-primary">#REG-2026-0001 (Tomini)</span>
+                        <span class="text-[10px] text-coral font-bold">1 Hari Lagi</span>
+                      </div>
+                      <p class="text-text-muted mt-0.5">Verifikasi kekurangan dokumen izin operasional oleh Tim PRL.</p>
+                      <button onclick="viewPengajuanDetail('PGJ-2026-001')" class="mt-1 text-[11px] text-secondary-teal font-semibold hover:underline">Periksa Berkas →</button>
+                    </div>
+                  </div>
+
+                  <div class="p-2.5 rounded-lg bg-surface-low border border-border flex items-start gap-2.5">
+                    <span class="material-symbols-outlined text-amber-warn text-[18px] shrink-0 mt-0.5">event</span>
+                    <div class="flex-1 text-[12px]">
+                      <div class="flex items-center justify-between">
+                        <span class="font-bold text-primary">Jadwal Pemaparan (Togean)</span>
+                        <span class="text-[10px] text-amber-warn font-bold">Besok 09:00 WITA</span>
+                      </div>
+                      <p class="text-text-muted mt-0.5">Pemaparan program PT Celebes Ekowisata Bahari di Ruang Rapat DKP.</p>
+                      <button onclick="navigateTo('berita-acara-dan-pks')" class="mt-1 text-[11px] text-secondary-teal font-semibold hover:underline">Buka Agenda BA →</button>
+                    </div>
+                  </div>
+
+                  <div class="p-2.5 rounded-lg bg-surface-low border border-border flex items-start gap-2.5">
+                    <span class="material-symbols-outlined text-secondary text-[18px] shrink-0 mt-0.5">handshake</span>
+                    <div class="flex-1 text-[12px]">
+                      <div class="flex items-center justify-between">
+                        <span class="font-bold text-primary">Penandatanganan PKS #0004</span>
+                        <span class="text-[10px] text-secondary font-bold">Siap Pengesahan</span>
+                      </div>
+                      <p class="text-text-muted mt-0.5">Draft PKS Universitas Tadulako disetujui Kepala DKP & UPTD.</p>
+                      <button onclick="navigateTo('berita-acara-dan-pks')" class="mt-1 text-[11px] text-secondary-teal font-semibold hover:underline">Terbitkan PKS →</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Audit Trail Activity Timeline -->
+              <div class="bg-surface-card p-4 rounded-xl border border-border shadow-sm flex-1">
+                <div class="flex items-center justify-between mb-3">
+                  <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-secondary text-[18px]">history</span>
+                    <h3 class="text-[14px] font-bold text-on-surface">Audit Trail Aktivitas Terkini</h3>
+                  </div>
+                  <span class="text-[10px] text-text-sub font-semibold">Tercatat Otomatis</span>
+                </div>
+                <div id="timeline-audit-log" class="space-y-3 relative pl-4 border-l-2 border-border/80 text-[12px]">
+                  <!-- Rendered by JS -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             SECTION 2: DAFTAR PENGAJUAN KEMITRAAN (FULL TABLE & ADVANCED FILTERS)
+             =================================================================== -->
+        <section id="section-daftar-pengajuan" class="content-section space-y-6">
+          <!-- Top Title Bar -->
+          <div class="flex flex-col xl:flex-row xl:items-center justify-between gap-4">
+            <div>
+              <div class="flex items-center gap-1.5 text-text-sub text-[11px] uppercase tracking-wider font-semibold">
+                <span>Pengelolaan Kawasan Konservasi</span>
+                <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+                <span class="text-secondary-teal">Daftar Pengajuan</span>
+              </div>
+              <h1 class="text-[24px] font-bold text-on-surface tracking-tight mt-0.5">Daftar Pengajuan Kemitraan Kawasan Konservasi</h1>
+              <p class="text-[13px] text-text-muted">
+                Kelola dan pantau seluruh permohonan kemitraan konservasi di 4 wilayah perairan Sulawesi Tengah.
+              </p>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2">
+              <button onclick="refreshDataFromServer()" class="btn-outline text-[12px]">
+                <span class="material-symbols-outlined text-[18px] text-secondary-teal">refresh</span>
+                <span>Muat Ulang</span>
+              </button>
+              <button onclick="navigateTo('ajukan-kemitraan')" class="btn-primary text-[12px]">
+                <span class="material-symbols-outlined text-[18px]">add_circle</span>
+                <span>+ Buat Pengajuan Baru (Lampiran II)</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Quick Filter Status Pills -->
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+            <div onclick="filterByQuickStatus('semua')" class="quick-pill cursor-pointer p-3 rounded-xl bg-surface-card border border-border shadow-sm hover:border-secondary-teal transition-all flex items-center justify-between">
+              <div>
+                <span class="text-[10px] uppercase font-bold text-text-sub">Semua Usulan</span>
+                <span id="pill-count-all" class="block text-[18px] font-bold text-on-surface">38</span>
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-surface-low text-text-sub">Total</span>
+            </div>
+
+            <div onclick="filterByQuickStatus('verifikasi')" class="quick-pill cursor-pointer p-3 rounded-xl bg-surface-card border border-border shadow-sm hover:border-secondary-teal transition-all flex items-center justify-between">
+              <div>
+                <span class="text-[10px] uppercase font-bold text-text-sub">Verifikasi Masuk</span>
+                <span id="pill-count-verifikasi" class="block text-[18px] font-bold text-secondary-teal">9</span>
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-secondary-teal/10 text-secondary-teal">Baru</span>
+            </div>
+
+            <div onclick="filterByQuickStatus('telaah')" class="quick-pill cursor-pointer p-3 rounded-xl bg-surface-card border border-border shadow-sm hover:border-secondary-teal transition-all flex items-center justify-between">
+              <div>
+                <span class="text-[10px] uppercase font-bold text-text-sub">Sedang Ditelaah</span>
+                <span id="pill-count-telaah" class="block text-[18px] font-bold text-primary">10</span>
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-primary/10 text-primary">Teknis</span>
+            </div>
+
+            <div onclick="filterByQuickStatus('pks')" class="quick-pill cursor-pointer p-3 rounded-xl bg-surface-card border border-border shadow-sm hover:border-secondary-teal transition-all flex items-center justify-between">
+              <div>
+                <span class="text-[10px] uppercase font-bold text-text-sub">Tahap PKS</span>
+                <span id="pill-count-pks" class="block text-[18px] font-bold text-secondary">7</span>
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-secondary/10 text-secondary">PKS</span>
+            </div>
+
+            <div onclick="filterByQuickStatus('monev')" class="quick-pill cursor-pointer p-3 rounded-xl bg-surface-card border border-border shadow-sm hover:border-secondary-teal transition-all flex items-center justify-between">
+              <div>
+                <span class="text-[10px] uppercase font-bold text-text-sub">Monev Aktif</span>
+                <span id="pill-count-monev" class="block text-[18px] font-bold text-marine">12</span>
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-marine/10 text-marine">Pelaksanaan</span>
+            </div>
+          </div>
+
+          <!-- Filter & Search Toolbar Bento -->
+          <div class="p-4 rounded-xl bg-surface-card border border-border shadow-sm space-y-3">
+            <div class="flex flex-col lg:flex-row gap-3 items-center justify-between">
+              <div class="relative w-full lg:max-w-md">
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-sub text-[18px]">search</span>
+                <input id="filter-search-input" onkeyup="applyTableFilters()" class="w-full pl-9 pr-3 py-2 bg-surface-low text-on-surface text-[12px] rounded-lg border border-transparent focus:border-secondary-teal focus:bg-white placeholder:text-text-sub/60" placeholder="Cari nomor, mitra, judul usulan, atau kata kunci..."/>
+              </div>
+
+              <!-- Export buttons -->
+              <div class="flex items-center gap-2 w-full lg:w-auto justify-end">
+                <button onclick="exportTableToExcel()" class="btn-outline text-[12px] py-2 px-3">
+                  <span class="material-symbols-outlined text-[16px] text-marine">table_view</span>
+                  <span>Unduh Excel (.xlsx)</span>
+                </button>
+                <button onclick="printFilteredTable()" class="btn-outline text-[12px] py-2 px-3">
+                  <span class="material-symbols-outlined text-[16px] text-coral">picture_as_pdf</span>
+                  <span>Cetak Laporan</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Dropdown Filters Row -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 pt-1">
+              <div>
+                <label class="block text-[10px] uppercase font-bold text-text-sub mb-1">Jenis Mitra</label>
+                <select id="filter-jenis-mitra" onchange="applyTableFilters()" class="w-full bg-surface-low text-on-surface text-[12px] rounded-lg px-2.5 py-1.5 border border-border focus:border-secondary-teal">
+                  <option value="">Semua Kategori Mitra</option>
+                  <option value="Kelompok Masyarakat">Kelompok Masyarakat</option>
+                  <option value="Masyarakat Adat">Masyarakat Adat</option>
+                  <option value="LSM">LSM (Provinsi / Nasional / Asing)</option>
+                  <option value="Pelaku Usaha">Pelaku Usaha / Korporasi</option>
+                  <option value="Perguruan Tinggi">Perguruan Tinggi / Akademisi</option>
+                  <option value="Lembaga Penelitian">Lembaga Penelitian</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-[10px] uppercase font-bold text-text-sub mb-1">Kawasan Konservasi</label>
+                <select id="filter-kawasan" onchange="applyTableFilters()" class="w-full bg-surface-low text-on-surface text-[12px] rounded-lg px-2.5 py-1.5 border border-border focus:border-secondary-teal">
+                  <option value="">Semua 4 Kawasan KEPMEN-KP</option>
+                  <option value="Banggai">KK Daerah Banggai Dalaka</option>
+                  <option value="Tomini">KK Perairan Teluk Tomini</option>
+                  <option value="Togean">KK Kepulauan Togean</option>
+                  <option value="Mori">KK Teluk Mori & Kolonodale</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-[10px] uppercase font-bold text-text-sub mb-1">Fase / Tahap</label>
+                <select id="filter-tahap" onchange="applyTableFilters()" class="w-full bg-surface-low text-on-surface text-[12px] rounded-lg px-2.5 py-1.5 border border-border focus:border-secondary-teal">
+                  <option value="">Semua 12 Tahap Prosedur</option>
+                  <option value="1">Tahap 1: Koordinasi UPTD</option>
+                  <option value="2">Tahap 2: Permohonan DKP</option>
+                  <option value="3">Tahap 3: Verifikasi Persyaratan</option>
+                  <option value="4">Tahap 4: Verifikasi RTRW & RPZ</option>
+                  <option value="5">Tahap 5: Penilaian Program & Biaya</option>
+                  <option value="6">Tahap 6: Presentasi / Pemaparan</option>
+                  <option value="7">Tahap 7: Hasil Penelaahan</option>
+                  <option value="8">Tahap 8: Keputusan Kesepakatan</option>
+                  <option value="9">Tahap 9: Penyusunan Draft PKS</option>
+                  <option value="10">Tahap 10: Lapor Gubernur</option>
+                  <option value="11">Tahap 11: Penandatanganan PKS</option>
+                  <option value="12">Tahap 12: Pelaksanaan & Monev</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-[10px] uppercase font-bold text-text-sub mb-1">Status Dokumen</label>
+                <select id="filter-status" onchange="applyTableFilters()" class="w-full bg-surface-low text-on-surface text-[12px] rounded-lg px-2.5 py-1.5 border border-border focus:border-secondary-teal">
+                  <option value="">Semua Status</option>
+                  <option value="Aktif">Sedang Berjalan</option>
+                  <option value="Perlu">Perlu Dilengkapi Mitra</option>
+                  <option value="Disepakati">Disepakati</option>
+                  <option value="Tidak">Tidak Dilanjutkan (Ditolak)</option>
+                  <option value="Selesai">PKS Sah / Selesai</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Main Interactive Data Table -->
+          <div class="bg-surface-card rounded-xl border border-border shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="table-custom">
+                <thead>
+                  <tr>
+                    <th>No. Registrasi</th>
+                    <th>Lembaga & Judul Usulan</th>
+                    <th>Jenis Mitra</th>
+                    <th>Kawasan & Zona</th>
+                    <th>Estimasi Biaya</th>
+                    <th>Tahap (1-12)</th>
+                    <th>Status Berjalan</th>
+                    <th class="text-center">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="table-pengajuan-body">
+                  <!-- Rendered dynamically by JavaScript.html -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Table Footer / Pagination -->
+            <div class="px-4 py-3 bg-surface-low border-t border-border flex flex-col sm:flex-row items-center justify-between gap-2 text-[12px] text-text-sub">
+              <div>
+                Menampilkan <span id="pagination-start" class="font-bold text-on-surface">1</span> - <span id="pagination-end" class="font-bold text-on-surface">10</span> dari <span id="pagination-total" class="font-bold text-on-surface">38</span> pengajuan kemitraan
+              </div>
+              <div class="flex items-center gap-1.5">
+                <button onclick="changePage(-1)" class="px-2.5 py-1 rounded border border-border bg-white hover:bg-surface-container font-semibold disabled:opacity-40">Sebelumnya</button>
+                <span id="pagination-page-indicator" class="px-3 py-1 font-bold text-primary">Hal 1 / 4</span>
+                <button onclick="changePage(1)" class="px-2.5 py-1 rounded border border-border bg-white hover:bg-surface-container font-semibold">Selanjutnya</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             SECTION 3: FORM AJUKAN KEMITRAAN BARU (LAMPIRAN II)
+             =================================================================== -->
+        <section id="section-ajukan-kemitraan" class="content-section space-y-6">
+          <div class="flex flex-col gap-1">
+            <div class="flex items-center gap-1.5 text-text-sub text-[11px]">
+              <a href="javascript:void(0)" onclick="navigateTo('daftar-pengajuan')" class="hover:text-secondary-teal">Pengajuan</a>
+              <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+              <span class="text-secondary-teal font-semibold">Formulir Lampiran II</span>
+            </div>
+            <div class="flex items-center gap-2 mt-1">
+              <span class="px-2 py-0.5 rounded-full bg-secondary-teal/15 text-secondary-teal text-[11px] font-bold uppercase">Lampiran II DKP Sulteng</span>
+              <span class="text-[11px] text-text-muted">Pergub No. 14 / Kepmen-KP Kawasan Konservasi</span>
+            </div>
+            <h1 class="text-[24px] font-bold text-on-surface tracking-tight mt-1">
+              Pengajuan Permohonan Kemitraan Pengelolaan Kawasan Konservasi
+            </h1>
+            <p class="text-[13px] text-text-muted">
+              Isi data permohonan kemitraan konservasi secara teliti. Berkas yang dikirim akan diverifikasi oleh Tim Bidang PRL DKP Sulteng.
+            </p>
+          </div>
+
+          <!-- Form Card -->
+          <div class="bg-surface-card p-6 rounded-xl border border-border shadow-sm max-w-4xl mx-auto space-y-6">
+            <form id="form-ajukan-kemitraan" onsubmit="handleFormPengajuanSubmit(event)" class="space-y-6">
+              <!-- Step 1: Profil Lembaga -->
+              <div>
+                <h3 class="text-[14px] font-bold text-primary flex items-center gap-2 pb-2 border-b border-border">
+                  <span class="w-6 h-6 rounded-full bg-primary text-white flex items-center justify-center text-[11px]">1</span>
+                  <span>Identitas Pemohon / Lembaga Pengusul</span>
+                </h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                  <div>
+                    <label class="block text-[12px] font-bold text-on-surface mb-1">Nama Lembaga / Kelompok <span class="text-coral">*</span></label>
+                    <input id="form-lembaga" required class="w-full text-[13px] px-3 py-2 bg-surface-low rounded-lg border border-border" placeholder="Contoh: Yayasan Terumbu Karang Teluk Tomini"/>
+                  </div>
+
+                  <div>
+                    <label class="block text-[12px] font-bold text-on-surface mb-1">Kategori Jenis Mitra <span class="text-coral">*</span></label>
+                    <select id="form-jenis-mitra" onchange="updatePersyaratanChecklistHint(this.value)" required class="w-full text-[13px] px-3 py-2 bg-surface-low rounded-lg border border-border cursor-pointer">
+                      <option value="">-- Pilih Jenis Mitra --</option>
+                      <option value="Kelompok Masyarakat">Kelompok Masyarakat</option>
+                      <option value="Masyarakat Adat">Masyarakat Adat</option>
+                      <option value="LSM Provinsi/Kabupaten/Kota">LSM Provinsi / Kabupaten / Kota</option>
+                      <option value="LSM Nasional">LSM Nasional</option>
+                      <option value="LSM Asing">LSM Asing</option>
+                      <option value="Pelaku Usaha / Korporasi">Pelaku Usaha / Korporasi</option>
+                      <option value="Lembaga Penelitian Dalam Negeri">Lembaga Penelitian Dalam Negeri</option>
+                      <option value="Lembaga Penelitian Asing">Lembaga Penelitian Asing</option>
+                      <option value="Perguruan Tinggi Nasional">Perguruan Tinggi Nasional</option>
+                      <option value="Perguruan Tinggi Asing">Perguruan Tinggi Asing</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label class="block text-[12px] font-bold text-on-surface mb-1">Nama Penanggung Jawab / Pimpinan <span class="text-coral">*</span></label>
+                    <input id="form-pimpinan" required class="w-full text-[13px] px-3 py-2 bg-surface-low rounded-lg border border-border" placeholder="Nama lengkap beserta gelar"/>
+                  </div>
+
+                  <div>
+                    <label class="block text-[12px] font-bold text-on-surface mb-1">Nomor Kontak / WhatsApp Aktif <span class="text-coral">*</span></label>
+                    <input id="form-telepon" type="tel" required class="w-full text-[13px] px-3 py-2 bg-surface-low rounded-lg border border-border" placeholder="08xxxxxxxxxx"/>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Step 2: Lokasi & Kawasan Konservasi -->
+              <div>
+                <h3 class="text-[14px] font-bold text-primary flex items-center gap-2 pb-2 border-b border-border">
+                  <span class="w-6 h-6 rounded-full bg-primary text-white flex items-center justify-center text-[11px]">2</span>
+                  <span>Lokasi & Kawasan Konservasi Sesuai RPZ</span>
+                </h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                  <div>
+                    <label class="block text-[12px] font-bold text-on-surface mb-1">Kawasan Konservasi Target <span class="text-coral">*</span></label>
+                    <select id="form-kawasan" required class="w-full text-[13px] px-3 py-2 bg-surface-low rounded-lg border border-border cursor-pointer">
+                      <option value="KK Perairan Teluk Tomini">KK Perairan Teluk Tomini (KEPMEN-KP No. 64/2020)</option>
+                      <option value="KK Daerah Banggai Dalaka">KK Daerah Banggai Dalaka (KEPMEN-KP No. 53/2019)</option>
+                      <option value="KK Kepulauan Togean">KK Kepulauan Togean (KEPMEN-KP No. 67/2021)</option>
+                      <option value="KK Teluk Mori & Kolonodale">KK Teluk Mori & Kolonodale (KEPMEN-KP No. 71/2022)</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label class="block text-[12px] font-bold text-on-surface mb-1">Zona Pemanfaatan Terkait <span class="text-coral">*</span></label>
+                    <input id="form-zona" required class="w-full text-[13px] px-3 py-2 bg-surface-low rounded-lg border border-border" placeholder="Contoh: Zona Pemanfaatan Bahari / Perikanan Berkelanjutan"/>
+                  </div>
+
+                  <div class="md:col-span-2">
+                    <label class="block text-[12px] font-bold text-on-surface mb-1">Rincian Lokasi Geografis / Pesisir / Desa <span class="text-coral">*</span></label>
+                    <input id="form-lokasi" required class="w-full text-[13px] px-3 py-2 bg-surface-low rounded-lg border border-border" placeholder="Nama desa, pulau, kecamatan, koordinat titik jika ada"/>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Step 3: Rencana Program & Pembiayaan -->
+              <div>
+                <h3 class="text-[14px] font-bold text-primary flex items-center gap-2 pb-2 border-b border-border">
+                  <span class="w-6 h-6 rounded-full bg-primary text-white flex items-center justify-center text-[11px]">3</span>
+                  <span>Rencana Program Kemitraan & Estimasi Pembiayaan</span>
+                </h3>
+
+                <div class="space-y-4 mt-4">
+                  <div>
+                    <label class="block text-[12px] font-bold text-on-surface mb-1">Judul Usulan Program Kemitraan <span class="text-coral">*</span></label>
+                    <input id="form-judul" required class="w-full text-[13px] px-3 py-2 bg-surface-low rounded-lg border border-border" placeholder="Contoh: Restorasi Terumbu Karang & Ekowisata Bahari Berkelanjutan Teluk Tomini"/>
+                  </div>
+
+                  <div>
+                    <label class="block text-[12px] font-bold text-on-surface mb-1">Uraian Ringkas Program & Manfaat Konservasi <span class="text-coral">*</span></label>
+                    <textarea id="form-uraian" rows="3" required class="w-full text-[13px] px-3 py-2 bg-surface-low rounded-lg border border-border" placeholder="Jelaskan latar belakang, tujuan program kemitraan, kegiatan utama, dan manfaat bagi kawasan konservasi daerah..."></textarea>
+                  </div>
+
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label class="block text-[12px] font-bold text-on-surface mb-1">Estimasi Kebutuhan Biaya (Rp) <span class="text-coral">*</span></label>
+                      <input id="form-biaya" type="number" required class="w-full text-[13px] px-3 py-2 bg-surface-low rounded-lg border border-border" placeholder="Contoh: 450000000"/>
+                    </div>
+
+                    <div>
+                      <label class="block text-[12px] font-bold text-on-surface mb-1">Sumber Pembiayaan <span class="text-coral">*</span></label>
+                      <input id="form-sumber-dana" required class="w-full text-[13px] px-3 py-2 bg-surface-low rounded-lg border border-border" placeholder="Contoh: Swadana Lembaga / CSR / Hibah Internasional"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Step 4: Ketentuan Khusus & Verifikasi -->
+              <div class="p-3.5 rounded-lg bg-surface-low border border-border text-[12px] text-text-muted space-y-2">
+                <div class="flex items-center gap-2 font-bold text-primary">
+                  <span class="material-symbols-outlined text-secondary-teal text-[18px]">verified</span>
+                  <span>Pernyataan Integritas & Kepatuhan Regulasi DKP</span>
+                </div>
+                <p>
+                  1. Kemitraan pengelolaan kawasan konservasi perairan <strong>bukan merupakan izin berusaha atau komersialisasi</strong>.
+                  <br/>2. Seluruh proses tunduk pada ketentuan peraturan perundang-undangan, RPZ, dan RTRW Provinsi Sulteng.
+                  <br/>3. Calon mitra bersedia mengikuti pemaparan program serta Monitoring & Evaluasi berkala.
+                </p>
+                <div class="flex items-center gap-2 pt-1">
+                  <input type="checkbox" id="form-setuju-syarat" required class="w-4 h-4 text-secondary rounded cursor-pointer"/>
+                  <label for="form-setuju-syarat" class="font-semibold text-on-surface cursor-pointer">
+                    Saya menyatakan data dan dokumen yang disampaikan adalah benar dan sah.
+                  </label>
+                </div>
+              </div>
+
+              <!-- Buttons -->
+              <div class="flex items-center justify-end gap-3 pt-4 border-t border-border">
+                <button type="button" onclick="navigateTo('daftar-pengajuan')" class="btn-outline text-[13px]">Batal</button>
+                <button type="submit" class="btn-primary text-[13px] px-6">
+                  <span class="material-symbols-outlined text-[18px]">send</span>
+                  <span>Kirim Permohonan Kemitraan</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             SECTION 4: DETAIL PENGAJUAN & TRACKER 12 TAHAP
+             =================================================================== -->
+        <section id="section-detail-pengajuan" class="content-section space-y-6">
+          <!-- Detail Header Banner -->
+          <div class="bg-surface-card p-6 rounded-xl border border-border shadow-sm space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-2 text-[12px] text-text-sub">
+              <div class="flex items-center gap-1.5">
+                <a href="javascript:void(0)" onclick="navigateTo('daftar-pengajuan')" class="hover:text-secondary-teal flex items-center gap-1">
+                  <span class="material-symbols-outlined text-[16px]">arrow_back</span>
+                  <span>Kembali ke Daftar</span>
+                </a>
+                <span>/</span>
+                <span id="detail-reg-number" class="font-bold text-primary">#REG-2026-0001</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="px-2.5 py-0.5 rounded-full bg-secondary-teal/15 text-secondary-teal font-bold text-[11px] flex items-center gap-1">
+                  <span class="w-2 h-2 rounded-full bg-secondary-teal animate-pulse"></span>
+                  Audit Trail Terenkripsi
+                </span>
+              </div>
+            </div>
+
+            <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
+              <div class="space-y-1">
+                <div class="flex flex-wrap items-center gap-2">
+                  <span id="detail-reg-badge" class="px-2.5 py-1 bg-primary text-white font-bold text-[12px] rounded-lg">#REG-2026-0001</span>
+                  <span id="detail-jenis-mitra-badge" class="px-2.5 py-1 bg-secondary-container text-on-secondary-container font-bold text-[12px] rounded-lg">LSM Nasional</span>
+                  <span id="detail-tahap-badge" class="px-2.5 py-1 bg-surface-low text-primary font-bold text-[12px] rounded-lg border border-border">Tahap 3 Aktif</span>
+                </div>
+                <h1 id="detail-judul-usulan" class="text-[20px] lg:text-[24px] font-bold text-primary tracking-tight">
+                  Pemberdayaan Masyarakat Pesisir & Konservasi Terumbu Karang Teluk Tomini
+                </h1>
+                <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-[12px] text-text-muted">
+                  <span class="flex items-center gap-1 text-on-surface font-semibold">
+                    <span class="material-symbols-outlined text-secondary text-[16px]">corporate_fare</span>
+                    <span id="detail-lembaga">Yayasan Terumbu Teluk Tomini</span>
+                  </span>
+                  <span class="flex items-center gap-1">
+                    <span class="material-symbols-outlined text-text-sub text-[16px]">travel_explore</span>
+                    <span id="detail-kawasan">KK Perairan Teluk Tomini</span>
+                  </span>
+                  <span class="flex items-center gap-1">
+                    <span class="material-symbols-outlined text-text-sub text-[16px]">payments</span>
+                    <span id="detail-biaya" class="font-bold text-primary">Rp 450.000.000</span>
+                  </span>
+                </div>
+              </div>
+
+              <!-- Action buttons -->
+              <div class="flex flex-wrap items-center gap-2">
+                <button onclick="openAdvanceModal()" class="btn-primary text-[12px]">
+                  <span class="material-symbols-outlined text-[18px]">forward</span>
+                  <span>Proses / Pindah Tahap</span>
+                </button>
+                <button onclick="printLembarDisposisi()" class="btn-outline text-[12px]">
+                  <span class="material-symbols-outlined text-[18px]">print</span>
+                  <span>Cetak Disposisi</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 12-Stage Visual Progress Tracker Stepper -->
+          <div class="bg-surface-card p-5 rounded-xl border border-border shadow-sm space-y-3">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+              <div>
+                <h3 class="text-[14px] font-bold text-primary flex items-center gap-1.5">
+                  <span class="material-symbols-outlined text-secondary text-[18px]">route</span>
+                  <span>Alur Progres 12 Tahap Kemitraan Konservasi (DKP Sulteng)</span>
+                </h3>
+                <span class="text-[11px] text-text-muted">Klik pada kotak tahapan untuk melihat pratinjau instrumen lampiran</span>
+              </div>
+              <div class="flex items-center gap-3 text-[10px] text-text-sub font-semibold">
+                <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-secondary-teal"></span> Selesai</span>
+                <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-primary-container"></span> Aktif</span>
+                <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-border"></span> Menunggu</span>
+              </div>
+            </div>
+
+            <!-- Horizontal Chevron Rail -->
+            <div id="detail-stepper-rail" class="stepper-rail pb-2">
+              <!-- Rendered dynamically by JavaScript.html -->
+            </div>
+          </div>
+
+          <!-- 2-Column Detail Content -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <!-- Left (7 cols): Data Pengajuan & Dokumen -->
+            <div class="lg:col-span-7 space-y-6">
+              <!-- Uraian Usulan & Spasial -->
+              <div class="bg-surface-card p-5 rounded-xl border border-border shadow-sm space-y-3">
+                <h3 class="text-[14px] font-bold text-on-surface flex items-center gap-2">
+                  <span class="material-symbols-outlined text-secondary text-[18px]">description</span>
+                  <span>Uraian Teknis & Ruang Kawasan</span>
+                </h3>
+                <div class="space-y-2 text-[12px]">
+                  <p id="detail-uraian" class="text-text-muted leading-relaxed">
+                    Rehabilitasi terumbu karang seluas 25 Ha dan pembentukan kelompok pemandu wisata selam berbasis konservasi.
+                  </p>
+                  <div class="grid grid-cols-2 gap-3 pt-2 border-t border-border">
+                    <div>
+                      <span class="text-text-sub text-[10px] uppercase font-bold block">Zona Perairan</span>
+                      <span id="detail-zona" class="font-semibold text-primary">Zona Inti & Pemanfaatan</span>
+                    </div>
+                    <div>
+                      <span class="text-text-sub text-[10px] uppercase font-bold block">Lokasi Spesifik</span>
+                      <span id="detail-lokasi" class="font-semibold text-primary">Kec. Tinombo & Kasimbar</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Berkas Persyaratan (Checklist Lampiran III) -->
+              <div class="bg-surface-card p-5 rounded-xl border border-border shadow-sm space-y-3">
+                <div class="flex items-center justify-between">
+                  <h3 class="text-[14px] font-bold text-on-surface flex items-center gap-2">
+                    <span class="material-symbols-outlined text-secondary text-[18px]">checklist</span>
+                    <span>Kelengkapan Persyaratan Administrasi (Lamp. III)</span>
+                  </h3>
+                  <button onclick="navigateTo('telaah-dan-verifikasi')" class="text-[11px] text-secondary-teal font-semibold hover:underline">Kelola Checklist →</button>
+                </div>
+                <div id="detail-checklist-items" class="space-y-2 text-[12px]">
+                  <!-- Rendered by JS -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Right (5 cols): Audit Trail & Tahap Controller -->
+            <div class="lg:col-span-5 space-y-6">
+              <!-- Action Card per Role -->
+              <div class="bg-surface-card p-5 rounded-xl border border-secondary-teal/40 shadow-sm space-y-3">
+                <h3 class="text-[14px] font-bold text-primary flex items-center gap-2">
+                  <span class="material-symbols-outlined text-secondary-teal text-[20px]">task_alt</span>
+                  <span>Tindakan Verifikator & Pimpinan</span>
+                </h3>
+                <p class="text-[12px] text-text-muted">
+                  Berdasarkan peran Anda (<strong id="detail-active-role-text" class="text-primary">Tim Bidang PRL</strong>), Anda memiliki wewenang untuk memeriksa kelengkapan persyaratan dan melakukan telaah teknis.
+                </p>
+                <div class="space-y-2 pt-1">
+                  <button onclick="openAdvanceModal('Lanjut')" class="w-full btn-primary text-[12px] justify-center py-2.5">
+                    <span class="material-symbols-outlined text-[18px]">check_circle</span>
+                    <span>Setujui & Lanjutkan Tahap</span>
+                  </button>
+                  <button onclick="openAdvanceModal('Perlu Dilengkapi')" class="w-full btn-outline text-[12px] justify-center py-2 text-coral border-coral/30 hover:bg-coral/5">
+                    <span class="material-symbols-outlined text-[18px]">replay</span>
+                    <span>Kembalikan untuk Dilengkapi Mitra</span>
+                  </button>
+                  <button onclick="openAdvanceModal('Tidak Disepakati')" class="w-full btn-outline text-[12px] justify-center py-2 text-error border-error/30 hover:bg-error/5">
+                    <span class="material-symbols-outlined text-[18px]">cancel</span>
+                    <span>Tolak / Tidak Dilanjutkan</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Riwayat Disposisi & Linimasa -->
+              <div class="bg-surface-card p-5 rounded-xl border border-border shadow-sm space-y-3">
+                <h3 class="text-[14px] font-bold text-on-surface flex items-center gap-2">
+                  <span class="material-symbols-outlined text-secondary text-[18px]">history_edu</span>
+                  <span>Riwayat Perpindahan Tahap Usulan Ini</span>
+                </h3>
+                <div id="detail-riwayat-list" class="space-y-3 text-[12px] border-l-2 border-border pl-3">
+                  <!-- Rendered by JS -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             SECTION 5: TELAAH & VERIFIKASI (LAMPIRAN III, IV, V)
+             =================================================================== -->
+        <section id="section-telaah-dan-verifikasi" class="content-section space-y-6">
+          <div class="flex flex-col gap-1">
+            <h1 class="text-[24px] font-bold text-on-surface tracking-tight">Workspace Telaah Teknis & Verifikasi</h1>
+            <p class="text-[13px] text-text-muted">Pemeriksaan kelengkapan administrasi (Lamp. III), telaah 10 aspek kesesuaian ruang/RPZ (Lamp. IV), dan telaah pembiayaan (Lamp. V).</p>
+          </div>
+
+          <!-- Sub Tabs -->
+          <div class="flex border-b border-border text-[13px] font-semibold gap-4">
+            <button onclick="switchTelaahTab('lamp3')" id="tab-btn-lamp3" class="pb-2 border-b-2 border-secondary-teal text-secondary-teal">1. Checklist Administrasi (Lamp. III)</button>
+            <button onclick="switchTelaahTab('lamp4')" id="tab-btn-lamp4" class="pb-2 border-b-2 border-transparent text-text-sub hover:text-primary">2. Telaah Program 10 Aspek (Lamp. IV)</button>
+            <button onclick="switchTelaahTab('lamp5')" id="tab-btn-lamp5" class="pb-2 border-b-2 border-transparent text-text-sub hover:text-primary">3. Telaah Pembiayaan (Lamp. V)</button>
+          </div>
+
+          <!-- TAB 1: Checklist Lampiran III -->
+          <div id="tab-pane-lamp3" class="bg-surface-card p-5 rounded-xl border border-border shadow-sm space-y-4">
+            <div class="flex items-center justify-between">
+              <div>
+                <h3 class="text-[14px] font-bold text-primary">Instrumen Pemeriksaan Persyaratan Administrasi</h3>
+                <span class="text-[11px] text-text-muted">Centang status kesesuaian dokumen pengusul</span>
+              </div>
+              <button onclick="saveChecklistPersyaratan()" class="btn-primary text-[12px]">Simpan Checklist</button>
+            </div>
+            <div id="telaah-checklist-container" class="space-y-3">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+
+          <!-- TAB 2: Telaah 10 Aspek Lampiran IV -->
+          <div id="tab-pane-lamp4" class="hidden bg-surface-card p-5 rounded-xl border border-border shadow-sm space-y-4">
+            <div class="flex items-center justify-between">
+              <div>
+                <h3 class="text-[14px] font-bold text-primary">10 Aspek Telaah Teknis Kesesuaian Ruang & Program</h3>
+                <span class="text-[11px] text-text-muted">Sesuai pedoman penetapan kawasan konservasi & RTRW Sulteng</span>
+              </div>
+              <button onclick="saveTelaahProgram()" class="btn-primary text-[12px]">Simpan Telaah Program</button>
+            </div>
+            <div id="telaah-10-aspek-container" class="space-y-3 text-[12px]">
+              <!-- 10 Aspects rendered by JS -->
+            </div>
+          </div>
+
+          <!-- TAB 3: Telaah Pembiayaan Lampiran V -->
+          <div id="tab-pane-lamp5" class="hidden bg-surface-card p-5 rounded-xl border border-border shadow-sm space-y-4">
+            <div class="flex items-center justify-between">
+              <div>
+                <h3 class="text-[14px] font-bold text-primary">Telaah Rencana Kebutuhan Biaya & Tanggung Jawab Para Pihak</h3>
+                <span class="text-[11px] text-text-muted">Lampiran V Regulasi DKP</span>
+              </div>
+              <button onclick="saveTelaahPembiayaan()" class="btn-primary text-[12px]">Simpan Telaah Biaya</button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-[12px]">
+              <div>
+                <label class="block font-bold text-primary mb-1">Rencana Kebutuhan Biaya</label>
+                <textarea id="telaah-biaya-rincian" rows="4" class="w-full p-2.5 bg-surface-low rounded-lg border border-border" placeholder="Rincian pos operasional, sarana prasarana, edukasi masyarakat..."></textarea>
+              </div>
+              <div>
+                <label class="block font-bold text-primary mb-1">Pembagian Tanggung Jawab Para Pihak</label>
+                <textarea id="telaah-tanggung-jawab" rows="4" class="w-full p-2.5 bg-surface-low rounded-lg border border-border" placeholder="Kewajiban pihak Calon Mitra dan kewajiban pendampingan oleh UPTD/DKP..."></textarea>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             SECTION 6: BERITA ACARA & PKS (TAHAP 6, 7, 9, 11)
+             =================================================================== -->
+        <section id="section-berita-acara-dan-pks" class="content-section space-y-6">
+          <div class="flex flex-col gap-1">
+            <h1 class="text-[24px] font-bold text-on-surface tracking-tight">Berita Acara (BA) & Perjanjian Kemitraan (PKS)</h1>
+            <p class="text-[13px] text-text-muted">Digitalisasi dokumen resmi Lampiran VI (Pemaparan), Lampiran VII (Penelaahan), dan PKS Final ber-QR verifikasi HMAC.</p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Left: Document List -->
+            <div class="bg-surface-card p-4 rounded-xl border border-border shadow-sm space-y-3">
+              <h3 class="text-[14px] font-bold text-primary">Pilih Jenis Dokumen Resmi</h3>
+              <div class="space-y-2 text-[12px]">
+                <button onclick="selectDocumentView('ba_pemaparan')" class="w-full text-left p-3 rounded-lg bg-surface-low hover:bg-surface-container border border-border flex items-center justify-between">
+                  <div>
+                    <span class="font-bold text-primary block">BA Presentasi / Pemaparan</span>
+                    <span class="text-[11px] text-text-sub">Lampiran VI (Tahap 6)</span>
+                  </div>
+                  <span class="material-symbols-outlined text-secondary">chevron_right</span>
+                </button>
+
+                <button onclick="selectDocumentView('ba_penelaahan')" class="w-full text-left p-3 rounded-lg bg-surface-low hover:bg-surface-container border border-border flex items-center justify-between">
+                  <div>
+                    <span class="font-bold text-primary block">BA Hasil Penelaahan</span>
+                    <span class="text-[11px] text-text-sub">Lampiran VII (Tahap 7)</span>
+                  </div>
+                  <span class="material-symbols-outlined text-secondary">chevron_right</span>
+                </button>
+
+                <button onclick="selectDocumentView('pks_final')" class="w-full text-left p-3 rounded-lg bg-secondary-teal/10 hover:bg-secondary-teal/15 border border-secondary-teal/30 flex items-center justify-between">
+                  <div>
+                    <span class="font-bold text-secondary block">Perjanjian Kemitraan (PKS Final)</span>
+                    <span class="text-[11px] text-text-sub">Tahap 11 (Dengan QR Verifikasi)</span>
+                  </div>
+                  <span class="material-symbols-outlined text-secondary-teal">verified</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Right: Interactive Document Preview & Action Panel -->
+            <div class="lg:col-span-2 bg-surface-card p-6 rounded-xl border border-border shadow-sm space-y-4">
+              <div class="flex items-center justify-between pb-3 border-b border-border">
+                <div>
+                  <h3 id="doc-preview-title" class="text-[16px] font-bold text-primary">Perjanjian Kemitraan Pengelolaan Kawasan Konservasi</h3>
+                  <span id="doc-preview-subtitle" class="text-[11px] text-text-muted">Nomor Dokumen: 523/PKS/DKP-SULTENG/2026</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <button onclick="printOfficialDoc()" class="btn-outline text-[12px] py-1.5 px-3">
+                    <span class="material-symbols-outlined text-[16px]">print</span>
+                    <span>Cetak PDF</span>
+                  </button>
+                  <button onclick="showDocQRModal()" class="btn-primary text-[12px] py-1.5 px-3">
+                    <span class="material-symbols-outlined text-[16px]">qr_code</span>
+                    <span>Lihat QR</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Formal Printable Sheet Mockup -->
+              <div id="printable-doc-sheet" class="printable-document p-6 bg-white border border-border/60 rounded-lg text-[13px] space-y-4 shadow-sm text-gray-800 font-sans">
+                <!-- Header Logo DKP -->
+                <div class="text-center pb-3 border-b-2 border-gray-800 space-y-0.5">
+                  <div class="font-bold text-[14px] uppercase tracking-wide">Pemerintah Provinsi Sulawesi Tengah</div>
+                  <div class="font-bold text-[16px] uppercase tracking-wide">Dinas Kelautan dan Perikanan</div>
+                  <div class="text-[11px] text-gray-600">Jalan Undata No. 7, Palu, Sulawesi Tengah • Telepon (0451) 421234</div>
+                </div>
+
+                <div class="text-center font-bold text-[14px] uppercase underline pt-2">
+                  PERJANJIAN KERJASAMA KEMITRAAN KONSERVASI PERAIRAN
+                </div>
+                <div class="text-center text-[11px] text-gray-600 -mt-2">
+                  Nomor: 523/PKS-KK/DKP/2026
+                </div>
+
+                <div class="space-y-2 text-justify text-[12px] leading-relaxed">
+                  <p>Pada hari ini, <strong>Rabu tanggal Dua Puluh Lima bulan Maret tahun Dua Ribu Dua Puluh Enam</strong>, bertempat di Palu, telah disepakati Perjanjian Kemitraan antara:</p>
+                  <p><strong>1. UPTD Pengelola Kawasan Konservasi Perairan Prov. Sulteng</strong>, dalam hal ini bertindak untuk dan atas nama Dinas Kelautan dan Perikanan Provinsi Sulawesi Tengah, selanjutnya disebut <strong>PIHAK PERTAMA</strong>.</p>
+                  <p><strong>2. Yayasan Terumbu Teluk Tomini</strong>, berkedudukan hukum di Sulawesi Tengah, selanjutnya disebut <strong>PIHAK KEDUA</strong>.</p>
+                  <p>Kedua belah pihak bersepakat mengadakan kemitraan dalam rangka pengelolaan berkelanjutan pada <strong>Kawasan Konservasi Perairan Teluk Tomini (Zona Inti dan Zona Pemanfaatan)</strong> sesuai dokumen rencana kemitraan yang telah ditelaah secara teknis.</p>
+                </div>
+
+                <!-- Signature block -->
+                <div class="grid grid-cols-2 gap-8 pt-6 text-center text-[12px]">
+                  <div>
+                    <div class="font-bold">PIHAK KEDUA</div>
+                    <div class="text-[11px] text-gray-600">Yayasan Terumbu Teluk Tomini</div>
+                    <div class="h-16"></div>
+                    <div class="font-bold underline">Ahmad Fauzi, S.Kel</div>
+                    <div class="text-[11px]">Ketua Pengurus</div>
+                  </div>
+
+                  <div>
+                    <div class="font-bold">PIHAK PERTAMA</div>
+                    <div class="text-[11px] text-gray-600">Kepala UPTD Pengelola KK</div>
+                    <div class="h-16"></div>
+                    <div class="font-bold underline">Drs. Hendra Wibowo, M.Sc</div>
+                    <div class="text-[11px]">NIP. 197808152002121003</div>
+                  </div>
+                </div>
+
+                <div class="text-center pt-2">
+                  <div class="font-bold text-[11px]">Mengetahui,</div>
+                  <div class="font-bold text-[11px]">Kepala Dinas Kelautan dan Perikanan Provinsi Sulawesi Tengah</div>
+                  <div class="h-14"></div>
+                  <div class="font-bold text-[12px] underline">Dr. H. Moh. Arif, S.Pi, M.Si</div>
+                  <div class="text-[11px]">Pembina Utama Muda, NIP. 197005121996031002</div>
+                </div>
+
+                <!-- Verification Stamp -->
+                <div class="pt-4 border-t border-dashed border-gray-300 flex items-center justify-between text-[10px] text-gray-500">
+                  <div class="flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-[16px] text-secondary">verified_user</span>
+                    <span>Tervalidasi Sistem SI-MITRA Sulteng • HMAC: <strong class="text-primary">a8b2f91-dkp-sulteng-2026</strong></span>
+                  </div>
+                  <div>Dokumen Resmi Digital</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             SECTION 7: MONITORING & EVALUASI (LAMPIRAN VIII)
+             =================================================================== -->
+        <section id="section-monitoring-dan-evaluasi" class="content-section space-y-6">
+          <div class="flex flex-col gap-1">
+            <h1 class="text-[24px] font-bold text-on-surface tracking-tight">Monitoring & Evaluasi (Monev) Kemitraan</h1>
+            <p class="text-[13px] text-text-muted">Pelaporan capaian berkala (Lampiran VIII) oleh mitra dan UPTD sebagai dasar pertimbangan keberlanjutan program.</p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <!-- Left: Input Monev Form -->
+            <div class="lg:col-span-5 bg-surface-card p-5 rounded-xl border border-border shadow-sm space-y-4">
+              <h3 class="text-[14px] font-bold text-primary flex items-center gap-2">
+                <span class="material-symbols-outlined text-secondary text-[18px]">add_chart</span>
+                <span>Input Laporan Monev Berkala (Lamp. VIII)</span>
+              </h3>
+
+              <form onsubmit="handleMonevSubmit(event)" class="space-y-3 text-[12px]">
+                <div>
+                  <label class="block font-bold text-on-surface mb-1">Pilih PKS Kemitraan Aktif</label>
+                  <select id="monev-select-pks" class="w-full p-2 bg-surface-low rounded-lg border border-border">
+                    <option value="PGJ-2026-005">WWF Koridor Wallacea (4 KK Sulteng)</option>
+                    <option value="PGJ-2026-001">Yayasan Terumbu Teluk Tomini (Teluk Tomini)</option>
+                    <option value="PGJ-2026-003">PT Celebes Ekowisata Bahari (Kep. Togean)</option>
+                  </select>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                  <div>
+                    <label class="block font-bold text-on-surface mb-1">Periode Laporan</label>
+                    <input id="monev-periode" class="w-full p-2 bg-surface-low rounded-lg border border-border" value="Semester I 2026"/>
+                  </div>
+                  <div>
+                    <label class="block font-bold text-on-surface mb-1">Capaian Target (%)</label>
+                    <input id="monev-capaian" type="number" min="0" max="100" class="w-full p-2 bg-surface-low rounded-lg border border-border" value="85"/>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block font-bold text-on-surface mb-1">Realisasi Pembiayaan (Rp)</label>
+                  <input id="monev-realisasi-dana" type="number" class="w-full p-2 bg-surface-low rounded-lg border border-border" value="380000000"/>
+                </div>
+
+                <div>
+                  <label class="block font-bold text-on-surface mb-1">Kendala Lapangan</label>
+                  <textarea id="monev-kendala" rows="2" class="w-full p-2 bg-surface-low rounded-lg border border-border" placeholder="Kendala cuaca, dinamika nelayan lokal, atau logistik..."></textarea>
+                </div>
+
+                <div>
+                  <label class="block font-bold text-on-surface mb-1">Rekomendasi Keberlanjutan</label>
+                  <textarea id="monev-rekomendasi" rows="2" class="w-full p-2 bg-surface-low rounded-lg border border-border" placeholder="Rekomendasi untuk UPTD dan DKP..."></textarea>
+                </div>
+
+                <button type="submit" class="w-full btn-primary text-[12px] justify-center py-2.5 mt-2">
+                  <span class="material-symbols-outlined text-[18px]">save</span>
+                  <span>Simpan Laporan Monev</span>
+                </button>
+              </form>
+            </div>
+
+            <!-- Right: Monev Realization Chart & List -->
+            <div class="lg:col-span-7 space-y-6">
+              <div class="bg-surface-card p-5 rounded-xl border border-border shadow-sm space-y-3">
+                <div class="flex items-center justify-between">
+                  <h3 class="text-[14px] font-bold text-primary">Capaian Monev Kemitraan per Kawasan</h3>
+                  <span class="text-[11px] font-bold text-marine">Rata-rata: 82.4%</span>
+                </div>
+                <div class="relative h-56">
+                  <canvas id="chart-monev-progress"></canvas>
+                </div>
+              </div>
+
+              <!-- Riwayat Laporan Monev -->
+              <div class="bg-surface-card p-5 rounded-xl border border-border shadow-sm space-y-3">
+                <h3 class="text-[14px] font-bold text-primary">Rekapitulasi Laporan Berkala Masuk</h3>
+                <div class="space-y-2 text-[12px]" id="monev-history-list">
+                  <!-- Rendered by JS -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             SECTION 8: LAPORAN & STATISTIK EKSEKUTIF
+             =================================================================== -->
+        <section id="section-laporan-dan-statistik" class="content-section space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <h1 class="text-[24px] font-bold text-on-surface tracking-tight">Laporan & Statistik Eksekutif</h1>
+              <p class="text-[13px] text-text-muted">Bahan pelaporan resmi Kepala Dinas Kelautan dan Perikanan kepada Gubernur Sulawesi Tengah.</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="exportTableToExcel()" class="btn-outline text-[12px]">
+                <span class="material-symbols-outlined text-[16px] text-marine">table_view</span>
+                <span>Unduh Data Excel</span>
+              </button>
+              <button onclick="window.print()" class="btn-primary text-[12px]">
+                <span class="material-symbols-outlined text-[16px]">print</span>
+                <span>Cetak Rekap Gubernur</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Printable Executive Summary Box -->
+          <div class="bg-surface-card p-6 rounded-xl border border-border shadow-sm space-y-4">
+            <div class="flex items-center gap-3 pb-3 border-b border-border">
+              <div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white">
+                <span class="material-symbols-outlined text-[24px]">assignment</span>
+              </div>
+              <div>
+                <h3 class="text-[16px] font-bold text-primary">Nota Rekapitulasi Kemitraan Pengelolaan Kawasan Konservasi</h3>
+                <span class="text-[11px] text-text-muted">Dinas Kelautan dan Perikanan Provinsi Sulawesi Tengah • Tahun Anggaran 2026</span>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-[12px]">
+              <div class="p-3 rounded-lg bg-surface-low border border-border">
+                <span class="text-[10px] uppercase font-bold text-text-sub block">Total Usulan Masuk</span>
+                <span class="text-[20px] font-bold text-primary">38 Usulan</span>
+              </div>
+              <div class="p-3 rounded-lg bg-surface-low border border-border">
+                <span class="text-[10px] uppercase font-bold text-text-sub block">PKS Sah Ditandatangani</span>
+                <span class="text-[20px] font-bold text-secondary">12 Kemitraan</span>
+              </div>
+              <div class="p-3 rounded-lg bg-surface-low border border-border">
+                <span class="text-[10px] uppercase font-bold text-text-sub block">Total Mobilisasi Dana</span>
+                <span class="text-[20px] font-bold text-marine">Rp 15,2 Miliar</span>
+              </div>
+              <div class="p-3 rounded-lg bg-surface-low border border-border">
+                <span class="text-[10px] uppercase font-bold text-text-sub block">Kawasan Konservasi</span>
+                <span class="text-[20px] font-bold text-primary">4 KKPD Sulteng</span>
+              </div>
+            </div>
+
+            <p class="text-[12px] text-text-muted leading-relaxed">
+              Seluruh kemitraan dikelola secara non-komersial berpedoman pada Peraturan Gubernur Sulawesi Tengah dan dokumen Rencana Pengelolaan Zonasi (RPZ) Kementerian Kelautan dan Perikanan RI.
+            </p>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             SECTION 9: MANAJEMEN PENGGUNA (ADMIN)
+             =================================================================== -->
+        <section id="section-manajemen-pengguna" class="content-section space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <h1 class="text-[24px] font-bold text-on-surface tracking-tight">Manajemen Pengguna & Hak Akses (RBAC)</h1>
+              <p class="text-[13px] text-text-muted">Kelola akun internal DKP (PRL, UPTD, Kepala DKP) dan akun mandiri Calon Mitra.</p>
+            </div>
+            <button onclick="openAddUserModal()" class="btn-primary text-[12px]">
+              <span class="material-symbols-outlined text-[18px]">person_add</span>
+              <span>+ Tambah Akun Internal</span>
+            </button>
+          </div>
+
+          <!-- User Table -->
+          <div class="bg-surface-card rounded-xl border border-border shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="table-custom">
+                <thead>
+                  <tr>
+                    <th>Nama Pengguna</th>
+                    <th>Email & Telepon</th>
+                    <th>Peran (Role)</th>
+                    <th>Lembaga / Instansi</th>
+                    <th>Status</th>
+                    <th class="text-right">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="table-users-body">
+                  <!-- Rendered by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             SECTION 10: VERIFIKASI DOKUMEN (PUBLIK / QR)
+             =================================================================== -->
+        <section id="section-verifikasi-dokumen" class="content-section space-y-6">
+          <div class="max-w-2xl mx-auto text-center space-y-2">
+            <div class="w-12 h-12 rounded-2xl bg-secondary-teal/15 text-secondary-teal flex items-center justify-center mx-auto">
+              <span class="material-symbols-outlined text-[28px]">qr_code_scanner</span>
+            </div>
+            <h1 class="text-[24px] font-bold text-on-surface tracking-tight">Portal Verifikasi Dokumen Kemitraan</h1>
+            <p class="text-[13px] text-text-muted">
+              Pindai kode QR atau masukkan kode HMAC untuk memverifikasi keaslian Berita Acara dan Perjanjian Kemitraan (PKS) DKP Sulteng.
+            </p>
+          </div>
+
+          <div class="bg-surface-card p-6 rounded-xl border border-border shadow-sm max-w-xl mx-auto space-y-4">
+            <div>
+              <label class="block text-[12px] font-bold text-on-surface mb-1">Kode Verifikasi HMAC Dokumen</label>
+              <div class="flex gap-2">
+                <input id="input-verify-hmac" class="flex-1 text-[13px] px-3 py-2 bg-surface-low rounded-lg border border-border" placeholder="Contoh: a8b2f91-dkp-sulteng-2026"/>
+                <button onclick="handlePublicVerify()" class="btn-primary text-[12px] px-4">Verifikasi</button>
+              </div>
+            </div>
+
+            <!-- Verification Result Box -->
+            <div id="verify-result-box" class="hidden p-4 rounded-lg bg-marine/10 border border-marine/30 text-[12px] space-y-1.5">
+              <div class="flex items-center gap-1.5 font-bold text-marine text-[13px]">
+                <span class="material-symbols-outlined text-[18px]">verified</span>
+                <span>DOKUMEN TERVERIFIKASI SAH</span>
+              </div>
+              <div id="verify-detail-text" class="text-text-muted">
+                Perjanjian Kemitraan No. 523/PKS/DKP/2026 terdaftar sah di pangkalan data Dinas Kelautan dan Perikanan Provinsi Sulawesi Tengah.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             SECTION 11: MIGRASI DATABASE (/gas-migrasi-database)
+             =================================================================== -->
+        <section id="section-migrasi-database" class="content-section space-y-6">
+          <div class="flex flex-col gap-1">
+            <h1 class="text-[24px] font-bold text-on-surface tracking-tight">Utilitas Migrasi & Sinkronisasi Database</h1>
+            <p class="text-[13px] text-text-muted">Pola migrasi aman tanpa menyentuh spreadsheet lama: dry-run pindai, pencocokan header, dan upsert idempoten.</p>
+          </div>
+
+          <div class="bg-surface-card p-6 rounded-xl border border-border shadow-sm max-w-3xl mx-auto space-y-4">
+            <div class="space-y-1">
+              <label class="block text-[12px] font-bold text-on-surface">URL atau ID Spreadsheet Sumber (Lama)</label>
+              <input id="input-migrasi-source-id" class="w-full text-[13px] px-3 py-2 bg-surface-low rounded-lg border border-border" placeholder="https://docs.google.com/spreadsheets/d/1ABCxyz.../edit atau ID"/>
+              <span class="text-[11px] text-text-sub">Spreadsheet lama hanya akan dibaca (read-only), tidak dimodifikasi sama sekali.</span>
+            </div>
+
+            <div class="flex items-center gap-3 pt-2">
+              <button onclick="handleScanMigrasi()" class="btn-primary text-[12px]">
+                <span class="material-symbols-outlined text-[16px]">search</span>
+                <span>1. Pindai Data (Dry-Run)</span>
+              </button>
+              <button onclick="handleExecuteMigrasi()" class="btn-outline text-[12px] text-secondary">
+                <span class="material-symbols-outlined text-[16px]">sync</span>
+                <span>2. Sinkronkan Data Nyata</span>
+              </button>
+            </div>
+
+            <!-- Migration Result Container -->
+            <div id="migrasi-result-container" class="hidden pt-3 border-t border-border text-[12px]">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             SECTION 12: PORTAL AUTHENTICATION (LOGIN & REGISTRASI)
+             =================================================================== -->
+        <section id="section-portal-auth" class="content-section space-y-6">
+          <div class="max-w-md mx-auto bg-surface-card p-6 rounded-2xl border border-border shadow-lg space-y-4">
+            <div class="text-center space-y-1">
+              <div class="w-12 h-12 rounded-xl bg-primary flex items-center justify-center text-secondary-teal mx-auto">
+                <span class="material-symbols-outlined text-[28px]">shield</span>
+              </div>
+              <h2 class="text-[18px] font-bold text-primary">Portal Akses SI-MITRA</h2>
+              <p class="text-[12px] text-text-muted">Masuk ke sistem atau registrasi akun mitra konservasi</p>
+            </div>
+
+            <div class="flex border-b border-border text-[13px] font-semibold">
+              <button onclick="toggleAuthTab('login')" id="auth-tab-btn-login" class="flex-1 pb-2 border-b-2 border-secondary-teal text-secondary-teal">Masuk Akun</button>
+              <button onclick="toggleAuthTab('register')" id="auth-tab-btn-register" class="flex-1 pb-2 border-b-2 border-transparent text-text-sub">Daftar Mitra</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="form-login" onsubmit="handleAuthLogin(event)" class="space-y-3 text-[12px]">
+              <div>
+                <label class="block font-bold text-on-surface mb-1">Email Resmi</label>
+                <input id="login-email" type="email" required class="w-full p-2.5 bg-surface-low rounded-lg border border-border" placeholder="nama@instansi.go.id"/>
+              </div>
+
+              <div>
+                <label class="block font-bold text-on-surface mb-1">Kata Sandi</label>
+                <input id="login-password" type="password" required class="w-full p-2.5 bg-surface-low rounded-lg border border-border" placeholder="••••••••"/>
+              </div>
+
+              <button type="submit" class="w-full btn-primary justify-center py-2.5 mt-2">Masuk ke SI-MITRA</button>
+            </form>
+
+            <!-- Register Form (Mitra) -->
+            <form id="form-register" onsubmit="handleAuthRegister(event)" class="hidden space-y-3 text-[12px]">
+              <div>
+                <label class="block font-bold text-on-surface mb-1">Nama Lembaga / Kelompok</label>
+                <input id="reg-lembaga" required class="w-full p-2.5 bg-surface-low rounded-lg border border-border" placeholder="Contoh: Pokmaswas Tanjung Api"/>
+              </div>
+              <div>
+                <label class="block font-bold text-on-surface mb-1">Kategori Mitra</label>
+                <select id="reg-jenis" class="w-full p-2.5 bg-surface-low rounded-lg border border-border">
+                  <option value="Kelompok Masyarakat">Kelompok Masyarakat</option>
+                  <option value="Masyarakat Adat">Masyarakat Adat</option>
+                  <option value="LSM Nasional">LSM Nasional</option>
+                  <option value="Pelaku Usaha / Korporasi">Pelaku Usaha / Korporasi</option>
+                  <option value="Perguruan Tinggi Nasional">Perguruan Tinggi Nasional</option>
+                </select>
+              </div>
+              <div>
+                <label class="block font-bold text-on-surface mb-1">Email</label>
+                <input id="reg-email" type="email" required class="w-full p-2.5 bg-surface-low rounded-lg border border-border" placeholder="kontak@lembaga.org"/>
+              </div>
+              <div>
+                <label class="block font-bold text-on-surface mb-1">Kata Sandi Baru</label>
+                <input id="reg-password" type="password" required class="w-full p-2.5 bg-surface-low rounded-lg border border-border" placeholder="Min 8 karakter"/>
+              </div>
+              <button type="submit" class="w-full btn-primary justify-center py-2.5 mt-2">Daftar Akun Mitra</button>
+            </form>
+
+            <!-- Quick Demo Personas -->
+            <div class="pt-3 border-t border-border text-[11px] text-text-sub space-y-1.5">
+              <span class="font-bold text-primary block">Pintasan Demo Persona (Klik Langsung):</span>
+              <div class="grid grid-cols-2 gap-1.5">
+                <button type="button" onclick="quickLoginDemo('prl')" class="p-1.5 rounded bg-surface-low border border-border text-left hover:border-secondary-teal">
+                  <strong class="text-primary block">1. Tim PRL</strong>
+                  <span>Ir. Kartika Sari</span>
+                </button>
+                <button type="button" onclick="quickLoginDemo('uptd')" class="p-1.5 rounded bg-surface-low border border-border text-left hover:border-secondary-teal">
+                  <strong class="text-primary block">2. UPTD</strong>
+                  <span>Drs. Hendra W.</span>
+                </button>
+                <button type="button" onclick="quickLoginDemo('kepala')" class="p-1.5 rounded bg-surface-low border border-border text-left hover:border-secondary-teal">
+                  <strong class="text-primary block">3. Kepala DKP</strong>
+                  <span>Dr. H. Moh. Arif</span>
+                </button>
+                <button type="button" onclick="quickLoginDemo('mitra')" class="p-1.5 rounded bg-surface-low border border-border text-left hover:border-secondary-teal">
+                  <strong class="text-primary block">4. Calon Mitra</strong>
+                  <span>Ahmad Fauzi</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- ======================== GLOBAL MODALS ======================== -->
+
+  <!-- Modal Advance Stage -->
+  <div id="modal-advance-stage" class="modal-overlay">
+    <div class="modal-box w-full max-w-lg p-6 space-y-4">
+      <div class="flex items-center justify-between pb-2 border-b border-border">
+        <h3 id="modal-advance-title" class="text-[16px] font-bold text-primary">Proses Pindah Tahapan Usulan</h3>
+        <button onclick="closeAdvanceModal()" class="text-text-sub hover:text-primary">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+
+      <div class="space-y-3 text-[12px]">
+        <div>
+          <label class="block font-bold text-on-surface mb-1">Target Tahapan Alur (1 - 12)</label>
+          <select id="modal-target-tahap" class="w-full p-2 bg-surface-low rounded-lg border border-border">
+            <option value="2">Tahap 2: Permohonan kepada DKP (Disposisi)</option>
+            <option value="3">Tahap 3: Verifikasi Administrasi Persyaratan</option>
+            <option value="4">Tahap 4: Verifikasi RTRW & RPZ Konservasi</option>
+            <option value="5">Tahap 5: Penilaian Program & Pembiayaan</option>
+            <option value="6">Tahap 6: Presentasi / Pemaparan</option>
+            <option value="7">Tahap 7: Hasil Penelaahan</option>
+            <option value="8">Tahap 8: Keputusan Kesepakatan</option>
+            <option value="9">Tahap 9: Penyusunan Draft PKS</option>
+            <option value="10">Tahap 10: Pelaporan ke Gubernur</option>
+            <option value="11">Tahap 11: Penandatanganan PKS</option>
+            <option value="12">Tahap 12: Pelaksanaan & Monev Berkala</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block font-bold text-on-surface mb-1">Keputusan / Status</label>
+          <select id="modal-keputusan" class="w-full p-2 bg-surface-low rounded-lg border border-border">
+            <option value="Disetujui Lanjut">Disetujui Lanjut</option>
+            <option value="Perlu Dilengkapi">Perlu Dilengkapi Mitra</option>
+            <option value="Tidak Disepakati">Tidak Disepakati (Ditolak)</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block font-bold text-on-surface mb-1">Catatan Verifikator / Disposisi</label>
+          <textarea id="modal-catatan" rows="3" class="w-full p-2 bg-surface-low rounded-lg border border-border" placeholder="Tuliskan catatan kelengkapan berkas, arahan Kepala Dinas, atau rekomendasi teknis..."></textarea>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-end gap-2 pt-3 border-t border-border">
+        <button onclick="closeAdvanceModal()" class="btn-outline text-[12px]">Batal</button>
+        <button onclick="confirmAdvanceStage()" class="btn-primary text-[12px]">Konfirmasi & Simpan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Document Preview (100% Anti-New-Tab) -->
+  <div id="modal-document-preview" class="modal-overlay">
+    <div class="modal-box w-full max-w-2xl p-6 space-y-4">
+      <div class="flex items-center justify-between pb-2 border-b border-border">
+        <h3 id="preview-modal-title" class="text-[16px] font-bold text-primary">Pratinjau Berkas Dokumen</h3>
+        <button onclick="closeDocPreviewModal()" class="text-text-sub hover:text-primary">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+
+      <div id="preview-modal-body" class="p-4 bg-surface-low rounded-lg text-[12px] max-h-96 overflow-y-auto">
+        <!-- Rendered by JS -->
+      </div>
+
+      <div class="flex items-center justify-end gap-2 pt-2 border-t border-border">
+        <button onclick="closeDocPreviewModal()" class="btn-outline text-[12px]">Tutup Pratinjau</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal QR Code View -->
+  <div id="modal-qr-view" class="modal-overlay">
+    <div class="modal-box w-full max-w-sm p-6 text-center space-y-4">
+      <div class="flex items-center justify-between pb-2 border-b border-border">
+        <h3 class="text-[14px] font-bold text-primary">QR Verifikasi Keaslian</h3>
+        <button onclick="closeQRModal()" class="text-text-sub hover:text-primary">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+
+      <div class="flex items-center justify-center p-4 bg-white rounded-xl border border-border">
+        <div id="qr-canvas-holder"></div>
+      </div>
+
+      <p class="text-[11px] text-text-muted">
+        Pindai QR ini melalui kamera smartphone atau menu Verifikasi Dokumen untuk memastikan keabsahan dokumen ber-HMAC.
+      </p>
+
+      <button onclick="closeQRModal()" class="btn-outline text-[12px] w-full justify-center">Tutup</button>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container"></div>
+
+  <!-- Modular JavaScript Include -->
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

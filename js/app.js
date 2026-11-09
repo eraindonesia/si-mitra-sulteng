@@ -1193,21 +1193,6 @@ function handleExecuteMigrasi() {
     });
   }
 }
-  if (!sourceId) {
-    showToast('Peringatan', 'Masukkan ID spreadsheet sumber terlebih dahulu.', 'warning');
-    return;
-  }
-
-  if (confirm('Jalankan migrasi data nyata ke database aplikasi baru?')) {
-    showToast('Migrasi Berjalan', 'Menyinkronkan data secara batch...', 'info');
-    callApi('execMigrasi', { sourceUrlOrId: sourceId, options: { dryRun: false } }).then(res => {
-      showToast('Selesai', (res && res.message) || 'Migrasi batch selesai.', 'success');
-      fetchDataFromServer();
-    }).catch(err => {
-      showToast('Gagal', err.message, 'error');
-    });
-  }
-}
 
 // ======================== CHARTS & VISUALIZATIONS ========================
 
